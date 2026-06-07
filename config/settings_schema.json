@@ -1,0 +1,131 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Voxellab",
+    "theme_version": "1.0.0",
+    "theme_author": "Voxellab",
+    "theme_documentation_url": "https://voxellab.store",
+    "theme_support_url": "https://voxellab.store"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_name_en",
+        "label": "Brand name (English)",
+        "default": "Voxellab"
+      },
+      {
+        "type": "text",
+        "id": "brand_name_ar",
+        "label": "Brand name (Arabic)",
+        "default": "فوكسل لاب"
+      },
+      {
+        "type": "textarea",
+        "id": "tagline_en",
+        "label": "Tagline (English)",
+        "default": "Crafted, not manufactured."
+      },
+      {
+        "type": "textarea",
+        "id": "tagline_ar",
+        "label": "Tagline (Arabic)",
+        "default": "مصنوع، لا مُصنَّع."
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Contact",
+    "settings": [
+      {
+        "type": "text",
+        "id": "email",
+        "label": "Email",
+        "default": "info@voxellab.store"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "WhatsApp number (digits only, with country code)",
+        "default": "97460002808"
+      },
+      {
+        "type": "text",
+        "id": "instagram_handle",
+        "label": "Instagram handle",
+        "default": "Voxellab.qa"
+      },
+      {
+        "type": "text",
+        "id": "location_en",
+        "label": "Location (English)",
+        "default": "Doha, Qatar"
+      },
+      {
+        "type": "text",
+        "id": "location_ar",
+        "label": "Location (Arabic)",
+        "default": "الدوحة، قطر"
+      }
+    ]
+  },
+  {
+    "name": "Display options",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_prices",
+        "label": "Show prices",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_weight",
+        "label": "Show product weight",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_designer",
+        "label": "Show designer name",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary (bronze)",
+        "default": "#8B5A3C"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background (cream)",
+        "default": "#FAF5EB"
+      },
+      {
+        "type": "color",
+        "id": "color_foreground",
+        "label": "Text (ink)",
+        "default": "#1F1815"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent (sunset)",
+        "default": "#E97451"
+      }
+    ]
+  }
+]

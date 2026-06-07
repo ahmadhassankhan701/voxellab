@@ -1,0 +1,12 @@
+<div class="brand-lockup {{ class }}">
+  {% render 'logo-mark', class: 'brand-lockup__mark' %}
+  <div class="brand-lockup__text">
+    {% if request.locale.iso_code == 'ar' %}
+      <span class="brand-lockup__name">{{ settings.brand_name_ar | default: 'فوكسل لاب' }}</span>
+      <span class="brand-lockup__sub">VOXELLAB</span>
+    {% else %}
+      <span class="brand-lockup__name">{{ settings.brand_name_en | default: 'Voxellab' }}</span>
+      <span class="brand-lockup__sub">{{ settings.brand_name_ar | default: 'فوكسل لاب' }}</span>
+    {% endif %}
+  </div>
+</div>

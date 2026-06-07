@@ -1,0 +1,63 @@
+<section class="page-section contact-page" data-section-id="{{ section.id }}">
+  <div class="container container--narrow">
+    <div class="contact-header">
+      <h1 class="contact-header__title font-display">{{ 'contact.title' | t }}</h1>
+      <p class="contact-header__subtitle">{{ 'contact.subtitle' | t }}</p>
+    </div>
+
+    <div class="contact-grid">
+      {%- if settings.whatsapp_number != blank -%}
+        <a href="https://wa.me/{{ settings.whatsapp_number }}" class="contact-card" target="_blank" rel="noopener noreferrer">
+          <div class="contact-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3 class="contact-card__title font-display">{{ 'contact.whatsapp' | t }}</h3>
+          <span class="contact-card__value" dir="ltr">+{{ settings.whatsapp_number }}</span>
+        </a>
+      {%- endif -%}
+
+      {%- if settings.instagram_handle != blank -%}
+        <a href="https://instagram.com/{{ settings.instagram_handle }}" class="contact-card" target="_blank" rel="noopener noreferrer">
+          <div class="contact-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg>
+          </div>
+          <h3 class="contact-card__title font-display">{{ 'contact.instagram' | t }}</h3>
+          <span class="contact-card__value" dir="ltr">@{{ settings.instagram_handle }}</span>
+        </a>
+      {%- endif -%}
+
+      {%- if settings.email != blank -%}
+        <a href="mailto:{{ settings.email }}" class="contact-card">
+          <div class="contact-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+          </div>
+          <h3 class="contact-card__title font-display">{{ 'contact.email' | t }}</h3>
+          <span class="contact-card__value" dir="ltr">{{ settings.email }}</span>
+        </a>
+      {%- endif -%}
+
+      {%- liquid
+        assign location = settings.location_en
+        if request.locale.iso_code == 'ar'
+          assign location = settings.location_ar
+        endif
+      -%}
+      <a href="https://www.google.com/maps/search/?api=1&query={{ location | url_encode }}" class="contact-card" target="_blank" rel="noopener noreferrer">
+        <div class="contact-card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3 class="contact-card__title font-display">{{ 'contact.location' | t }}</h3>
+        <span class="contact-card__value">{{ location }}</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact page",
+  "tag": "section",
+  "class": "section-contact",
+  "settings": []
+}
+{% endschema %}

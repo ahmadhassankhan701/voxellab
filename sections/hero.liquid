@@ -1,0 +1,68 @@
+<section class="hero" data-section-id="{{ section.id }}">
+  <div class="hero__bg">
+    {%- if section.settings.hero_image != blank -%}
+      {{
+        section.settings.hero_image
+        | image_url: width: 2000
+        | image_tag: class: 'hero__bg-image', loading: 'eager', alt: ''
+      }}
+    {%- else -%}
+      <div class="hero__bg-placeholder"></div>
+    {%- endif -%}
+    <div class="hero__overlay"></div>
+  </div>
+
+  <div class="container hero__content">
+    <h1 class="hero__title font-display">
+      {%- if section.settings.title_line1 != blank -%}{{ section.settings.title_line1 }}{%- else -%}{{ 'home.hero_title_line1' | t }}{%- endif -%}<br>
+      <span class="hero__title-accent font-accent">{%- if section.settings.title_line2 != blank -%}{{ section.settings.title_line2 }}{%- else -%}{{ 'home.hero_title_line2' | t }}{%- endif -%}</span>
+    </h1>
+    <p class="hero__subtitle">
+      {%- if section.settings.subtitle != blank -%}{{ section.settings.subtitle }}{%- else -%}{{ 'home.hero_subtitle' | t }}{%- endif -%}
+    </p>
+    <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="btn btn--primary btn--lg btn--pill">
+      {{ 'home.shop_now' | t }}
+      <svg class="hero__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "section",
+  "class": "section-hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "title_line1",
+      "label": "Title line 1 (leave blank to use translation)"
+    },
+    {
+      "type": "text",
+      "id": "title_line2",
+      "label": "Title line 2 (leave blank to use translation)"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle (leave blank to use translation)"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

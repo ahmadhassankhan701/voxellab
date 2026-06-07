@@ -1,0 +1,54 @@
+{%- liquid
+  assign card_product = product
+  if card_product == blank and product_ref != blank
+    assign card_product = product_ref
+  endif
+-%}
+
+<a href="{{ card_product.url }}" class="product-card group">
+  <div class="product-card__media">
+    {%- if card_product.compare_at_price > card_product.price and settings.show_prices -%}
+      {%- assign discount = card_product.compare_at_price | minus: card_product.price | times: 100.0 | divided_by: card_product.compare_at_price | round -%}
+      <span class="badge badge--sale">-{{ discount }}%</span>
+    {%- endif -%}
+
+    {%- if card_product.metafields.custom.badge != blank -%}
+      <span class="badge badge--primary">{{ card_product.metafields.custom.badge }}</span>
+    {%- endif -%}
+
+    {%- if card_product.featured_media -%}
+      {{
+        card_product.featured_media
+        | image_url: width: 600
+        | image_tag:
+          class: 'product-card__image product-card__image--primary',
+          loading: 'lazy',
+          alt: card_product.featured_media.alt | default: card_product.title
+      }}
+      {%- if card_product.media.size > 1 -%}
+        {{
+          card_product.media[1]
+          | image_url: width: 600
+          | image_tag:
+            class: 'product-card__image product-card__image--hover',
+            loading: 'lazy',
+            alt: card_product.media[1].alt | default: card_product.title
+        }}
+      {%- endif -%}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'product-card__placeholder' }}
+    {%- endif -%}
+  </div>
+
+  <div class="product-card__info">
+    <h3 class="product-card__title">{{ card_product.title }}</h3>
+    {%- if settings.show_prices -%}
+      <div class="product-card__price">
+        {%- if card_product.compare_at_price > card_product.price -%}
+          <s class="product-card__price-compare">{{ card_product.compare_at_price | money }}</s>
+        {%- endif -%}
+        <span class="product-card__price-current">{{ card_product.price | money }}</span>
+      </div>
+    {%- endif -%}
+  </div>
+</a>

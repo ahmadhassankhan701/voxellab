@@ -1,0 +1,116 @@
+<section class="page-section collection-page" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="page-header page-header--split">
+      <div>
+        <h1 class="page-title font-display">{{ collection.title | default: 'collection.title' | t }}</h1>
+        {%- if collection.description != blank -%}
+          <p class="page-subtitle">{{ collection.description }}</p>
+        {%- else -%}
+          <p class="page-subtitle">{{ 'collection.subtitle' | t }}</p>
+        {%- endif -%}
+      </div>
+      <button type="button" class="btn btn--outline filter-toggle hidden-desktop" data-filter-toggle>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+        {{ 'collection.filter_sort' | t }}
+      </button>
+    </div>
+
+    <div class="collection-layout">
+      <aside class="collection-sidebar" data-collection-sidebar>
+        <div class="collection-sidebar__mobile-header hidden-desktop">
+          <h2 class="font-display">{{ 'collection.filter_sort' | t }}</h2>
+          <button type="button" class="btn btn--ghost btn--icon" data-filter-close aria-label="{{ 'accessibility.close' | t }}">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <div class="collection-sidebar__block">
+          <h3 class="collection-sidebar__heading font-display">{{ 'collection.categories' | t }}</h3>
+          <ul class="collection-sidebar__list">
+            <li>
+              <a href="{{ routes.all_products_collection_url }}" class="sidebar-link{% unless collection %} sidebar-link--active{% endunless %}">
+                {{ 'collection.all' | t }}
+              </a>
+            </li>
+            {%- for coll in collections -%}
+              {%- unless coll.handle == 'frontpage' -%}
+                <li>
+                  <a href="{{ coll.url }}" class="sidebar-link{% if coll.handle == collection.handle %} sidebar-link--active{% endif %}">
+                    {{ coll.title }} <span class="sidebar-link__count">({{ coll.all_products_count }})</span>
+                  </a>
+                </li>
+              {%- endunless -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+
+        {%- if settings.show_prices and collection.filters.size > 0 -%}
+          <div class="collection-sidebar__block">
+            <h3 class="collection-sidebar__heading font-display">{{ 'collection.sort_by' | t }}</h3>
+            <form class="collection-filters">
+              {%- for filter in collection.filters -%}
+                {%- if filter.type == 'price_range' -%}
+                  <details class="filter-group">
+                    <summary>{{ filter.label }}</summary>
+                    <div class="filter-group__content">
+                      <input type="number" name="{{ filter.min_value.param_name }}" placeholder="Min" value="{{ filter.min_value.value | money_without_currency }}">
+                      <input type="number" name="{{ filter.max_value.param_name }}" placeholder="Max" value="{{ filter.max_value.value | money_without_currency }}">
+                    </div>
+                  </details>
+                {%- endif -%}
+              {%- endfor -%}
+            </form>
+          </div>
+        {%- endif -%}
+      </aside>
+
+      <div class="collection-main">
+        {%- paginate collection.products by section.settings.products_per_page -%}
+          {%- if collection.products.size == 0 -%}
+            <div class="empty-state">
+              <p>{{ 'collection.no_products' | t }}</p>
+              <a href="{{ routes.all_products_collection_url }}" class="btn btn--link">{{ 'collection.clear_filters' | t }}</a>
+            </div>
+          {%- else -%}
+            <div class="products-grid products-grid--3">
+              {%- for product in collection.products -%}
+                {% render 'product-card', product_ref: product %}
+              {%- endfor -%}
+            </div>
+
+            {%- if paginate.pages > 1 -%}
+              <nav class="pagination" aria-label="Pagination">
+                {%- if paginate.previous -%}
+                  <a href="{{ paginate.previous.url }}" class="btn btn--outline">{{ 'general.pagination.previous' | t }}</a>
+                {%- endif -%}
+                <span class="pagination__info">{{ paginate.current_page }} / {{ paginate.pages }}</span>
+                {%- if paginate.next -%}
+                  <a href="{{ paginate.next.url }}" class="btn btn--outline">{{ 'general.pagination.next' | t }}</a>
+                {%- endif -%}
+              </nav>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection",
+  "tag": "section",
+  "class": "section-main-collection",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 36,
+      "step": 4,
+      "default": 12,
+      "label": "Products per page"
+    }
+  ]
+}
+{% endschema %}

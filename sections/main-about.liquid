@@ -1,0 +1,47 @@
+<section class="page-section about-page" data-section-id="{{ section.id }}">
+  <div class="about-hero">
+    <div class="container container--narrow">
+      <p class="about-hero__eyebrow">{{ 'about.eyebrow' | t }}</p>
+      <h1 class="about-hero__title font-display">{{ 'about.title' | t }}</h1>
+      <p class="about-hero__intro">{%- if section.settings.intro != blank -%}{{ section.settings.intro }}{%- else -%}{{ 'about.intro' | t }}{%- endif -%}</p>
+    </div>
+  </div>
+
+  <div class="container container--narrow-lg about-content">
+    <div class="about-grid">
+      <div class="about-grid__media">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: section.settings.image.alt }}
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag }}
+        {%- endif -%}
+      </div>
+      <div class="about-grid__text">
+        <h2 class="font-display">{{ 'about.story_title' | t }}</h2>
+        <p>{{ 'about.story_p1' | t }}</p>
+        <p>{{ 'about.story_p2' | t }}</p>
+        <p class="about-quote font-display">{{ 'about.story_quote' | t }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About page",
+  "tag": "section",
+  "class": "section-about",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro (leave blank for translation default)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Studio image"
+    }
+  ]
+}
+{% endschema %}

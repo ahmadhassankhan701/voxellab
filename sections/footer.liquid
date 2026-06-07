@@ -1,0 +1,77 @@
+{%- liquid
+  assign brand_tagline = settings.tagline_en
+  assign brand_location = settings.location_en
+  if request.locale.iso_code == 'ar'
+    assign brand_tagline = settings.tagline_ar
+    assign brand_location = settings.location_ar
+  endif
+-%}
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        {% render 'brand-lockup', class: 'site-footer__logo' %}
+        <p class="site-footer__tagline">{{ brand_tagline }}</p>
+        {%- if settings.instagram_handle != blank -%}
+          <a href="https://instagram.com/{{ settings.instagram_handle }}" class="site-footer__social" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg>
+          </a>
+        {%- endif -%}
+      </div>
+
+      <div class="site-footer__col">
+        <h3 class="site-footer__heading">{{ 'footer.quick_links' | t }}</h3>
+        <ul class="site-footer__links">
+          <li><a href="{{ routes.all_products_collection_url }}">{{ 'header.shop' | t }}</a></li>
+          {%- for link in linklists[section.settings.menu].links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h3 class="site-footer__heading">{{ 'footer.contact_us' | t }}</h3>
+        <ul class="site-footer__links">
+          {%- if settings.email != blank -%}
+            <li><a href="mailto:{{ settings.email }}" dir="ltr">{{ settings.email }}</a></li>
+          {%- endif -%}
+          {%- if settings.whatsapp_number != blank -%}
+            <li><a href="https://wa.me/{{ settings.whatsapp_number }}" dir="ltr" target="_blank" rel="noopener noreferrer">+{{ settings.whatsapp_number }}</a></li>
+          {%- endif -%}
+          <li>
+            <a href="https://www.google.com/maps/search/?api=1&query={{ brand_location | url_encode }}" target="_blank" rel="noopener noreferrer">
+              {{ brand_location }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p>&copy; {{ 'now' | date: '%Y' }}
+        {%- if request.locale.iso_code == 'ar' -%}
+          {{ settings.brand_name_ar }}
+        {%- else -%}
+          {{ settings.brand_name_en }}
+        {%- endif -%}.
+        {{ 'footer.rights' | t }}
+      </p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "section-footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "footer"
+    }
+  ]
+}
+{% endschema %}

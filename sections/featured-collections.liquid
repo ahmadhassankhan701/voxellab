@@ -1,0 +1,88 @@
+<section class="section section--collections" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <h2 class="section-title font-display">{{ 'home.browse_collections' | t }}</h2>
+      <p class="section-subtitle">{{ 'home.collections_subtitle' | t }}</p>
+    </div>
+
+    <div class="collections-grid">
+      {%- if section.settings.collection_list != blank -%}
+        {%- for coll in section.settings.collection_list limit: section.settings.collections_to_show -%}
+          <a href="{{ coll.url }}" class="collection-card">
+            <div class="collection-card__overlay"></div>
+            <h3 class="collection-card__title font-display">{{ coll.title }}</h3>
+            {%- if coll.featured_image -%}
+              {{
+                coll.featured_image
+                | image_url: width: 600
+                | image_tag: class: 'collection-card__image', loading: 'lazy', alt: coll.title
+              }}
+            {%- elsif coll.products.first.featured_media -%}
+              {{
+                coll.products.first.featured_media
+                | image_url: width: 600
+                | image_tag: class: 'collection-card__image', loading: 'lazy', alt: coll.title
+              }}
+            {%- else -%}
+              {{ 'collection-1' | placeholder_svg_tag: 'collection-card__placeholder' }}
+            {%- endif -%}
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for coll in collections limit: section.settings.collections_to_show -%}
+          {%- unless coll.handle == 'frontpage' -%}
+            <a href="{{ coll.url }}" class="collection-card">
+              <div class="collection-card__overlay"></div>
+              <h3 class="collection-card__title font-display">{{ coll.title }}</h3>
+              {%- if coll.featured_image -%}
+                {{
+                  coll.featured_image
+                  | image_url: width: 600
+                  | image_tag: class: 'collection-card__image', loading: 'lazy', alt: coll.title
+                }}
+              {%- elsif coll.products.first.featured_media -%}
+                {{
+                  coll.products.first.featured_media
+                  | image_url: width: 600
+                  | image_tag: class: 'collection-card__image', loading: 'lazy', alt: coll.title
+                }}
+              {%- else -%}
+                {{ 'collection-1' | placeholder_svg_tag: 'collection-card__placeholder' }}
+              {%- endif -%}
+            </a>
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collections",
+  "tag": "section",
+  "class": "section-featured-collections",
+  "settings": [
+    {
+      "type": "collection_list",
+      "id": "collection_list",
+      "label": "Collections",
+      "limit": 8
+    },
+    {
+      "type": "range",
+      "id": "collections_to_show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4,
+      "label": "Collections to show"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collections"
+    }
+  ]
+}
+{% endschema %}

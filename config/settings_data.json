@@ -1,0 +1,31 @@
+{
+  "current": {
+    "brand_name_en": "Voxellab",
+    "brand_name_ar": "فوكسل لاب",
+    "tagline_en": "Crafted, not manufactured.",
+    "tagline_ar": "مصنوع، لا مُصنَّع.",
+    "email": "info@voxellab.store",
+    "whatsapp_number": "97460002808",
+    "instagram_handle": "Voxellab.qa",
+    "location_en": "Doha, Qatar",
+    "location_ar": "الدوحة، قطر",
+    "show_prices": false,
+    "show_weight": false,
+    "show_designer": false,
+    "color_primary": "#8B5A3C",
+    "color_background": "#FAF5EB",
+    "color_foreground": "#1F1815",
+    "color_accent": "#E97451",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {}
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {}
+      }
+    },
+    "content_for_index": []
+  }
+}

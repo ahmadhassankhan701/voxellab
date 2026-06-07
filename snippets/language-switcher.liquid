@@ -1,0 +1,25 @@
+{%- liquid
+  assign iso = request.locale.iso_code
+  assign other_locale = 'en'
+  if iso == 'en'
+    assign other_locale = 'ar'
+  endif
+
+  for l in localization.available_languages
+    if l.iso_code == other_locale
+      assign switch_url = l.root_url
+      break
+    endif
+  endfor
+
+  if switch_url == blank
+    if other_locale == 'ar'
+      assign switch_url = '/ar'
+    else
+      assign switch_url = '/'
+    endif
+  endif
+-%}
+<a href="{{ switch_url }}" class="btn btn--ghost btn--sm lang-switch" aria-label="Switch language">
+  {{ 'header.language_switch' | t }}
+</a>

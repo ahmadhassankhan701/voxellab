@@ -1,0 +1,9 @@
+# Files ignored when running `shopify theme push`
+.git/
+.github/
+.gitignore
+.shopifyignore
+README.md
+shopify.theme.toml
+*.md
+.DS_Store

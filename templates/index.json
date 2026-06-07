@@ -1,0 +1,38 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "featured_collections": {
+      "type": "featured-collections",
+      "settings": {
+        "collections_to_show": 4
+      }
+    },
+    "featured_products": {
+      "type": "featured-products",
+      "settings": {
+        "products_to_show": 4
+      }
+    },
+    "brand_story": {
+      "type": "brand-story",
+      "settings": {}
+    },
+    "curated_products": {
+      "type": "featured-products",
+      "settings": {
+        "heading_style": "curated",
+        "products_to_show": 8
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "featured_collections",
+    "featured_products",
+    "brand_story",
+    "curated_products"
+  ]
+}

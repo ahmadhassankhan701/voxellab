@@ -1,0 +1,167 @@
+<section class="page-section product-page" data-section-id="{{ section.id }}">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">{{ 'header.home' | t }}</a>
+      <span class="breadcrumb__sep" aria-hidden="true">›</span>
+      {%- if product.collections.first -%}
+        <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+        <span class="breadcrumb__sep" aria-hidden="true">›</span>
+      {%- endif -%}
+      <span class="breadcrumb__current">{{ product.title }}</span>
+    </nav>
+
+    <div class="product-layout">
+      <div class="product-gallery">
+        <div class="product-gallery__main">
+          {%- if product.compare_at_price > product.price and settings.show_prices -%}
+            {%- assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+            <span class="badge badge--sale badge--lg">-{{ discount }}%</span>
+          {%- endif -%}
+          {%- if product.metafields.custom.badge != blank -%}
+            <span class="badge badge--primary badge--lg">{{ product.metafields.custom.badge }}</span>
+          {%- endif -%}
+
+          {%- if product.featured_media -%}
+            {{
+              product.featured_media
+              | image_url: width: 1200
+              | image_tag: id: 'ProductMainImage', class: 'product-gallery__image', alt: product.featured_media.alt
+            }}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'product-gallery__placeholder' }}
+          {%- endif -%}
+        </div>
+
+        {%- if product.media.size > 1 -%}
+          <div class="product-gallery__thumbs">
+            {%- for media in product.media limit: 4 -%}
+              <button type="button" class="product-gallery__thumb{% if forloop.first %} product-gallery__thumb--active{% endif %}" data-media-id="{{ media.id }}" data-media-url="{{ media | image_url: width: 1200 }}" aria-label="View image {{ forloop.index }}">
+                {{
+                  media
+                  | image_url: width: 200
+                  | image_tag: loading: 'lazy', alt: media.alt
+                }}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="product-details">
+        {%- if settings.show_designer and product.metafields.custom.designer_name != blank -%}
+          <div class="product-designer">
+            {%- if product.metafields.custom.designer_avatar != blank -%}
+              <img src="{{ product.metafields.custom.designer_avatar | image_url: width: 48 }}" alt="" width="24" height="24" class="product-designer__avatar">
+            {%- endif -%}
+            <span>{{ 'product.design_by' | t }} <strong>{{ product.metafields.custom.designer_name }}</strong></span>
+          </div>
+        {%- endif -%}
+
+        <h1 class="product-title font-display">{{ product.title }}</h1>
+
+        {%- if settings.show_prices -%}
+          <div class="product-price">
+            <span class="product-price__current">{{ product.price | money }}</span>
+            {%- if product.compare_at_price > product.price -%}
+              <s class="product-price__compare">{{ product.compare_at_price | money }}</s>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <div class="product-description rte">
+          {%- if product.description != blank -%}
+            {{ product.description }}
+          {%- else -%}
+            <p>{{ 'product.no_description' | t }}</p>
+          {%- endif -%}
+        </div>
+
+        {% form 'product', product, class: 'product-form' %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              <div class="product-option">
+                <label for="Option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+                <select id="Option-{{ section.id }}-{{ forloop.index0 }}" name="options[{{ option.name | escape }}]">
+                  {%- for value in option.values -%}
+                    <option value="{{ value | escape }}"{% if option.selected_value == value %} selected{% endif %}>{{ value }}</option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <div class="product-form__actions">
+            <div class="quantity-selector">
+              <button type="button" class="quantity-selector__btn" data-qty-minus aria-label="Decrease quantity">−</button>
+              <input type="number" name="quantity" value="1" min="1" class="quantity-selector__input" data-qty-input aria-label="{{ 'product.quantity' | t }}">
+              <button type="button" class="quantity-selector__btn" data-qty-plus aria-label="Increase quantity">+</button>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--lg btn--pill product-form__submit"{% unless product.selected_or_first_available_variant.available %} disabled{% endunless %}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              {%- if product.selected_or_first_available_variant.available -%}
+                {{ 'product.add_to_cart' | t }}
+              {%- else -%}
+                {{ 'product.sold_out' | t }}
+              {%- endif -%}
+            </button>
+          </div>
+        {% endform %}
+
+        <div class="product-specs">
+          {%- if product.metafields.custom.dimensions != blank -%}
+            <div class="product-spec">
+              <span>{{ 'product.dimensions' | t }}</span>
+              <span dir="ltr">{{ product.metafields.custom.dimensions }}</span>
+            </div>
+          {%- endif -%}
+          {%- if product.metafields.custom.material != blank -%}
+            <div class="product-spec">
+              <span>{{ 'product.material' | t }}</span>
+              <span>{{ product.metafields.custom.material }}</span>
+            </div>
+          {%- endif -%}
+          {%- if settings.show_weight and product.metafields.custom.weight_grams != blank -%}
+            <div class="product-spec">
+              <span>{{ 'product.weight' | t }}</span>
+              <span dir="ltr">{{ product.metafields.custom.weight_grams }}g</span>
+            </div>
+          {%- endif -%}
+          {%- if product.metafields.custom.pieces_count != blank -%}
+            <div class="product-spec">
+              <span>{{ 'product.pieces' | t }}</span>
+              <span>{{ product.metafields.custom.pieces_count }}</span>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    {%- if product.collections.first and product.collections.first.products.size > 1 -%}
+      <div class="related-products">
+        <h2 class="related-products__title font-display">{{ 'product.you_might_also_like' | t }}</h2>
+        <div class="products-grid products-grid--4">
+          {%- assign related_count = 0 -%}
+          {%- for related in product.collections.first.products -%}
+            {%- if related.id != product.id -%}
+              {% render 'product-card', product_ref: related %}
+              {%- assign related_count = related_count | plus: 1 -%}
+              {%- if related_count >= 4 -%}{%- break -%}{%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product",
+  "tag": "section",
+  "class": "section-main-product",
+  "settings": []
+}
+{% endschema %}

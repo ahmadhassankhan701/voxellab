@@ -1,0 +1,72 @@
+{%- liquid
+  assign brand_tagline = settings.tagline_en
+  if request.locale.iso_code == 'ar'
+    assign brand_tagline = settings.tagline_ar
+  endif
+-%}
+
+<header class="site-header" data-section-id="{{ section.id }}">
+  <div class="container site-header__inner">
+    <div class="site-header__start">
+      <button type="button" class="btn btn--ghost btn--icon mobile-menu-toggle" aria-label="{{ 'accessibility.menu' | t }}" aria-expanded="false" data-mobile-menu-toggle>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <a href="{{ routes.root_url }}" class="site-header__logo">
+        {% render 'brand-lockup' %}
+      </a>
+    </div>
+
+    <nav class="site-header__nav" aria-label="Main">
+      <a href="{{ routes.root_url }}" class="nav-link{% if request.page_type == 'index' %} nav-link--active{% endif %}">{{ 'header.home' | t }}</a>
+      <a href="{{ routes.all_products_collection_url }}" class="nav-link{% if request.page_type == 'collection' %} nav-link--active{% endif %}">{{ 'header.shop' | t }}</a>
+      {%- for link in linklists[section.settings.menu].links -%}
+        <a href="{{ link.url }}" class="nav-link{% if link.active %} nav-link--active{% endif %}">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <div class="site-header__actions">
+      {% render 'language-switcher' %}
+      <button type="button" class="btn btn--ghost btn--icon theme-toggle" aria-label="Toggle theme" data-theme-toggle>
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a href="{{ routes.cart_url }}" class="btn btn--ghost btn--icon cart-link" aria-label="{{ 'header.cart' | t }}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        {%- if cart.item_count > 0 -%}
+          <span class="cart-count">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+    </div>
+  </div>
+
+  <div class="mobile-menu hidden" data-mobile-menu>
+    <div class="mobile-menu__header">
+      {% render 'brand-lockup' %}
+      <button type="button" class="btn btn--ghost btn--icon" aria-label="{{ 'accessibility.close' | t }}" data-mobile-menu-close>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <nav class="mobile-menu__nav">
+      <a href="{{ routes.root_url }}">{{ 'header.home' | t }}</a>
+      <a href="{{ routes.all_products_collection_url }}">{{ 'header.shop' | t }}</a>
+      {%- for link in linklists[section.settings.menu].links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,106 @@
+<section class="page-section cart-page" data-section-id="{{ section.id }}">
+  <div class="container container--narrow-lg">
+    {%- if cart.item_count == 0 -%}
+      <div class="cart-empty">
+        <div class="cart-empty__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
+        <h1 class="cart-empty__title font-display">{{ 'cart.empty_title' | t }}</h1>
+        <p class="cart-empty__body">{{ 'cart.empty_body' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary btn--lg btn--pill">{{ 'cart.browse_shop' | t }}</a>
+      </div>
+    {%- else -%}
+      <h1 class="page-title font-display">{{ 'cart.title' | t }}</h1>
+
+      <form action="{{ routes.cart_url }}" method="post" class="cart-layout">
+        <div class="cart-items">
+          {%- for item in cart.items -%}
+            <div class="cart-item">
+              <a href="{{ item.url }}" class="cart-item__media">
+                {%- if item.image -%}
+                  {{ item.image | image_url: width: 256 | image_tag: loading: 'lazy', alt: item.product.title }}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag }}
+                {%- endif -%}
+              </a>
+
+              <div class="cart-item__details">
+                <div class="cart-item__header">
+                  <div>
+                    <a href="{{ item.url }}" class="cart-item__title font-display">{{ item.product.title }}</a>
+                    {%- if settings.show_designer and item.product.metafields.custom.designer_name != blank -%}
+                      <p class="cart-item__meta">{{ 'product.design_by' | t }} {{ item.product.metafields.custom.designer_name }}</p>
+                    {%- endif -%}
+                    {%- unless item.product.has_only_default_variant -%}
+                      <p class="cart-item__variant">{{ item.variant.title }}</p>
+                    {%- endunless -%}
+                  </div>
+                  <a href="{{ item.url_to_remove }}" class="cart-item__remove" aria-label="{{ 'cart.remove' | t }}">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                  </a>
+                </div>
+
+                <div class="cart-item__footer">
+                  <div class="quantity-selector quantity-selector--sm">
+                    <button type="button" class="quantity-selector__btn" data-line-qty-minus data-line="{{ forloop.index }}" aria-label="Decrease">−</button>
+                    <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" class="quantity-selector__input" data-line="{{ forloop.index }}" aria-label="{{ 'product.quantity' | t }}">
+                    <button type="button" class="quantity-selector__btn" data-line-qty-plus data-line="{{ forloop.index }}" aria-label="Increase">+</button>
+                  </div>
+
+                  {%- if settings.show_prices -%}
+                    <div class="cart-item__price">
+                      <span class="cart-item__price-total">{{ item.final_line_price | money }}</span>
+                      {%- if item.quantity > 1 -%}
+                        <span class="cart-item__price-each">{{ item.final_price | money }} {{ 'cart.each' | t }}</span>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <aside class="cart-summary">
+          <h2 class="cart-summary__title font-display">{{ 'cart.order_summary' | t }}</h2>
+
+          <div class="cart-summary__rows">
+            <div class="cart-summary__row">
+              <span>{{ 'cart.items' | t }}</span>
+              <span>{{ cart.item_count }}</span>
+            </div>
+            {%- if settings.show_prices -%}
+              <div class="cart-summary__row">
+                <span>{{ 'cart.subtotal' | t }}</span>
+                <span>{{ cart.total_price | money }}</span>
+              </div>
+            {%- endif -%}
+            <div class="cart-summary__row">
+              <span>{{ 'cart.shipping' | t }}</span>
+              <span class="cart-summary__note">{{ 'cart.shipping_note' | t }}</span>
+            </div>
+          </div>
+
+          {%- if settings.show_prices -%}
+            <div class="cart-summary__total">
+              <span class="font-display">{{ 'cart.total' | t }}</span>
+              <span class="cart-summary__total-price">{{ cart.total_price | money }}</span>
+            </div>
+          {%- endif -%}
+
+          <button type="submit" name="checkout" class="btn btn--primary btn--lg btn--pill btn--full">{{ 'cart.checkout' | t }}</button>
+          <a href="{{ routes.all_products_collection_url }}" class="cart-summary__continue">{{ 'cart.continue_shopping' | t }}</a>
+        </aside>
+      </form>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "tag": "section",
+  "class": "section-main-cart",
+  "settings": []
+}
+{% endschema %}

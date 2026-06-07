@@ -1,0 +1,115 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "close": "Close",
+    "menu": "Menu"
+  },
+  "header": {
+    "home": "Home",
+    "shop": "Shop",
+    "about": "About",
+    "contact": "Contact",
+    "cart": "Cart",
+    "language_switch": "عربي"
+  },
+  "footer": {
+    "quick_links": "Quick Links",
+    "contact_us": "Contact Us",
+    "rights": "All rights reserved."
+  },
+  "home": {
+    "hero_title_line1": "Crafted in",
+    "hero_title_line2": "Pure Luxury",
+    "hero_subtitle": "Unique pieces with a modern touch that bring character to your space.",
+    "shop_now": "Shop Now",
+    "browse_collections": "Browse Collections",
+    "collections_subtitle": "Artistic, functional pieces — curated with care.",
+    "new_arrivals": "New Arrivals",
+    "view_all": "View All",
+    "about_title_line1": "We craft beauty,",
+    "about_title_line2": "layer by layer",
+    "about_body": "We blend modern design with a classic touch — each piece crafted with care in Doha.",
+    "discover_story": "Discover Our Story",
+    "curated_selection": "Curated Selection"
+  },
+  "collection": {
+    "title": "Shop",
+    "subtitle": "Browse our entire collection of unique pieces.",
+    "filter_sort": "Filter & Sort",
+    "categories": "Categories",
+    "all": "All",
+    "sort_by": "Sort By",
+    "sort_featured": "Featured",
+    "sort_price_asc": "Price: Low to High",
+    "sort_price_desc": "Price: High to Low",
+    "sort_sale": "On Sale",
+    "no_products": "No products found matching your criteria.",
+    "clear_filters": "Clear filters",
+    "products_count": "{{ count }} products"
+  },
+  "product": {
+    "add_to_cart": "Add to Cart",
+    "sold_out": "Sold Out",
+    "design_by": "Design by",
+    "dimensions": "Dimensions",
+    "material": "Material",
+    "weight": "Weight",
+    "pieces": "Pieces",
+    "no_description": "No description available.",
+    "you_might_also_like": "You might also like",
+    "quantity": "Quantity",
+    "sale_badge": "Sale"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty_title": "Your cart is empty",
+    "empty_body": "Looks like you haven't added anything to your cart yet. Discover our premium collection and start shopping.",
+    "browse_shop": "Browse Shop",
+    "order_summary": "Order Summary",
+    "items": "Items",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "shipping_note": "Calculated at checkout",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "continue_shopping": "Continue Shopping",
+    "each": "each",
+    "remove": "Remove",
+    "update": "Update"
+  },
+  "about": {
+    "eyebrow": "Qatar's 3D-print studio",
+    "title": "About Voxellab",
+    "intro": "voxellab is a 3D-printing studio crafting modern, premium pieces. We blend trending global designs with Qatari heritage touches — each piece made locally with care and high-quality materials.",
+    "story_title": "Our Story",
+    "story_p1": "We blend modern design with touches of our heritage, crafting every piece locally with care. In the heart of Doha, we turn trending global designs into premium pieces with a Qatari touch.",
+    "story_p2": "Every piece is printed and finished with care inside Qatar — from idea to finished product — using high-quality materials.",
+    "story_quote": "Made in Qatar 🇶🇦 — crafted, not manufactured."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We're here to answer your questions and help you choose the perfect piece.",
+    "whatsapp": "WhatsApp",
+    "instagram": "Instagram",
+    "email": "Email",
+    "location": "Location"
+  },
+  "404": {
+    "title": "Page not found",
+    "body": "The page you're looking for doesn't exist.",
+    "back_home": "Back to Home"
+  },
+  "onboarding": {
+    "product_title": "Example product"
+  }
+}
