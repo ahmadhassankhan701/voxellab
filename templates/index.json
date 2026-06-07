@@ -22,7 +22,12 @@
     "featured_collections": {
       "type": "featured-collections",
       "settings": {
-        "collection_list": [],
+        "collection_list": [
+          "desk-stationary",
+          "lighting",
+          "planters",
+          "vases"
+        ],
         "collections_to_show": 4
       }
     },
