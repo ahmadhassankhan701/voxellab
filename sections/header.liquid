@@ -17,8 +17,8 @@
     </div>
 
     <nav class="site-header__nav" aria-label="Main">
-      <a href="{{ routes.root_url }}" class="nav-link{% if request.page_type == 'index' %} nav-link--active{% endif %}">{{ 'header.home' | t }}</a>
-      <a href="{{ routes.all_products_collection_url }}" class="nav-link{% if request.page_type == 'collection' %} nav-link--active{% endif %}">{{ 'header.shop' | t }}</a>
+      {% comment %} <a href="{{ routes.root_url }}" class="nav-link{% if request.page_type == 'index' %} nav-link--active{% endif %}">{{ 'header.home' | t }}</a> {% endcomment %}
+      {% comment %} <a href="{{ routes.all_products_collection_url }}" class="nav-link{% if request.page_type == 'collection' %} nav-link--active{% endif %}">{{ 'header.shop' | t }}</a> {% endcomment %}
       {%- for link in linklists[section.settings.menu].links -%}
         <a href="{{ link.url }}" class="nav-link{% if link.active %} nav-link--active{% endif %}">{{ link.title }}</a>
       {%- endfor -%}
