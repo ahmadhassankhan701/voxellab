@@ -116,6 +116,7 @@ html[dir="ltr"] .font-display { font-family: 'Sora', sans-serif; }
   border-bottom: 1px solid hsl(var(--border) / 0.4);
   background: hsl(var(--background) / 0.8);
   backdrop-filter: blur(12px);
+  margin-bottom: 0;
 }
 .site-header__inner {
   display: flex; align-items: center; justify-content: space-between;
