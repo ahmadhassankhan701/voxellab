@@ -224,6 +224,7 @@ html[dir="rtl"] .hero__arrow { transform: scaleX(-1); }
 .section { padding: 5rem 0; }
 @media (min-width: 768px) { .section { padding: 8rem 0; } }
 .section--products { background: hsl(var(--muted) / 0.1); }
+.section-header { margin-bottom: 3rem; }
 .section-header--center { text-align: center; }
 .section-header--split {
   display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem;
