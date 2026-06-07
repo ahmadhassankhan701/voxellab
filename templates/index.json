@@ -46,7 +46,8 @@
         "title_line1": "",
         "title_line2": "",
         "body": "",
-        "button_link": ""
+        "image": "shopify://shop_images/story.png",
+        "button_link": "shopify://pages/about"
       }
     },
     "curated_products": {
