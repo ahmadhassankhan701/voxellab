@@ -27,12 +27,14 @@
 
     function open() {
       menu.classList.remove('hidden');
+      menu.setAttribute('aria-hidden', 'false');
       toggle.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
     }
 
     function close() {
       menu.classList.add('hidden');
+      menu.setAttribute('aria-hidden', 'true');
       toggle.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
     }
