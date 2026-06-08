@@ -2048,6 +2048,11 @@
         "order_status_message": {
           "table_view": {
             "estimated_delivery": "تاريخ التسليم المقدر {{date}}"
+          },
+          "list_view": {
+            "view_order_for_details": "عرض الطلب لمزيد من التفاصيل",
+            "estimated_delivery": "المتوقع {{date}}",
+            "last_updated": "آخر تحديث {{date}}"
           }
         },
         "payment_status": {
@@ -2118,7 +2123,59 @@
         },
         "show_order_actions_accessibility_label": "عرض إجراءات الطلب للطلب {{name}}",
         "view_order": "عرض الطلب",
-        "view_order_accessibility_label": "عرض الطلب {{orderName}}"
+        "view_order_accessibility_label": "عرض الطلب {{orderName}}",
+        "column_headers": {
+          "order": "أمر",
+          "total": "الإجمالي",
+          "actions_accessibility_label": "إجراءات",
+          "products_accessibility_label": "المنتجات"
+        },
+        "delivered": "تم التسليم {{date}}",
+        "empty_state_order_source_description": "الطلبات التي قدمها {{email}} فقط هي التي ستظهر هنا.",
+        "empty_state_subtitle": "اذهب إلى المتجر لتقديم طلب.",
+        "empty_state_title": "لا توجد طلبات بعد",
+        "empty_state_with_location_title": "لا توجد طلبات لـ {{locationName}}",
+        "empty_state_title_for_pending_orders": "لا توجد طلبات معلقة",
+        "no_order_banner": "لاختبار إضافتك على صفحة حالة الطلب، أنشئ طلبًا.",
+        "estimated_shortform": "تأسست عام {{date}}",
+        "estimated_delivery": "المتوقع {{date}}",
+        "one_images_accessibility_label": "يتضمن الطلب {{lineItemName1}}",
+        "two_images_accessibility_label": "يشمل الطلب {{lineItemName1}} و{{lineItemName2}}",
+        "three_images_accessibility_label": "الطلب يتضمن {{lineItemName1}} و{{lineItemName2}} و{{lineItemName3}}",
+        "four_images_accessibility_label": "يتضمن الطلب {{lineItemName1}} و{{lineItemName2}} و{{lineItemName3}} و{{lineItemName4}}",
+        "more_than_three_products_accessibility_label": "يشتمل الطلب على {{lineItemName1}} و{{lineItemName2}} و{{numberOfAdditionalProducts}} منتجات إضافية أخرى",
+        "more_than_four_products_accessibility_label": "يحتوي الطلب على {{lineItemName1}}، {{lineItemName2}}، {{lineItemName3}}، و{{numberOfAdditionalProducts}} منتجات إضافية",
+        "plus_more_products": "+{{numberOfAdditionalProducts}} منتجات",
+        "carousel": {
+          "one_products_accessibility_label": "الطلب يتضمن {{lineItemName1}} الكمية {{lineItemQuantity1}}",
+          "two_products_accessibility_label": "يتضمن الطلب {{lineItemName1}} الكمية {{lineItemQuantity1}}، {{lineItemName2}} الكمية {{lineItemQuantity2}}",
+          "three_products_accessibility_label": "الطلب يتضمن {{lineItemName1}} الكمية {{lineItemQuantity1}}، {{lineItemName2}} الكمية {{lineItemQuantity2}}، {{lineItemName3}} الكمية {{lineItemQuantity3}}",
+          "four_products_accessibility_label": "الطلب يتضمن {{lineItemName1}} الكمية {{lineItemQuantity1}}، {{lineItemName2}} الكمية {{lineItemQuantity2}}، {{lineItemName3}} الكمية {{lineItemQuantity3}}، {{lineItemName4}} الكمية {{lineItemQuantity4}}",
+          "five_products_accessibility_label": "يحتوي الطلب على {{lineItemName1}} الكمية {{lineItemQuantity1}}، {{lineItemName2}} الكمية {{lineItemQuantity2}}، {{lineItemName3}} الكمية {{lineItemQuantity3}}، {{lineItemName4}} الكمية {{lineItemQuantity4}}، {{lineItemName5}} الكمية {{lineItemQuantity5}}",
+          "six_products_accessibility_label": "يتضمن الطلب {{lineItemName1}} كمية {{lineItemQuantity1}}، {{lineItemName2}} كمية {{lineItemQuantity2}}، {{lineItemName3}} كمية {{lineItemQuantity3}}، {{lineItemName4}} كمية {{lineItemQuantity4}}، {{lineItemName5}} كمية {{lineItemQuantity5}}، {{lineItemName6}} كمية {{lineItemQuantity6}}",
+          "six_and_more_products_accessibility_label": "الطلب يتضمن {{lineItemName1}} كمية {{lineItemQuantity1}}، {{lineItemName2}} كمية {{lineItemQuantity2}}، {{lineItemName3}} كمية {{lineItemQuantity3}}، {{lineItemName4}} كمية {{lineItemQuantity4}}، {{lineItemName5}} كمية {{lineItemQuantity5}}، {{lineItemName6}} كمية {{lineItemQuantity6}} والمزيد",
+          "view_order_details": "عرض تفاصيل الطلب",
+          "previous": "السابق",
+          "next": "التالي"
+        },
+        "items": {
+          "one": "{{count}} عنصر",
+          "other": "{{count}} عناصر"
+        },
+        "no_filtered_results_description": "أزِل الفلاتر أو عدّلها للاطلاع على طلباتك",
+        "no_filtered_results_title": "لا توجد نتائج مصفاة",
+        "order_link": "عرض الطلب {{name}}",
+        "order_number": "اطلب {{name}}",
+        "orders_title": "تم التأكيد",
+        "pagination": {
+          "nav_accessibility_label": "أزرار التنقل الخاصة بالطلبات",
+          "next": "التالي",
+          "next_accessibility_label": "الطلبات التالية",
+          "previous": "السابق",
+          "previous_accessibility_label": "الطلبات السابقة",
+          "load_more": "تحميل المزيد",
+          "load_more_accessibility_label": "تحميل المزيد من الطلبات"
+        }
       },
       "order_status": {
         "attempted_delivery_label": "محاولة تسليم",
@@ -2191,7 +2248,14 @@
         "out_for_delivery_label": "خارج للتسليم",
         "resume_tracking": "تتبع السيرة الذاتية",
         "submitted_label": "تم التقديم"
-      }
+      },
+      "list_layout_accessibility_label": "خيارات التخطيط",
+      "list_title": "الطلبات",
+      "list_title_with_pending_orders": "الطلبات:",
+      "list_title_confirmed_orders_accessibility_label": "الطلبات: مؤكدة",
+      "list_title_pending_orders_accessibility_label": "الطلبات: معلقة",
+      "switch_order_type_pending_orders_accessibility_label": "تبديل نوع الطلب، أنت تعرض حالياً الطلبات المعلّقة",
+      "switch_order_type_confirmed_orders_accessibility_label": "تغيير نوع الطلب، أنت تعرض الطلبات المؤكدة حالياً"
     },
     "subscriptions": {
       "update_payment_instrument": {
@@ -2907,6 +2971,69 @@
         "enabled": "يمكن للعملاء طلب المرتجعات وإدارتها بأنفسهم.",
         "disabled": "يجب على العملاء التواصل مع التاجر لطلب الإرجاع."
       }
+    },
+    "navigation_and_structure": {
+      "skip_to_content": "تجاوز إلى المحتوى"
+    },
+    "announcement_bar": {
+      "expand_label": "توسيع شريط الإعلانات",
+      "collapse_label": "طي شريط الإعلان",
+      "close_label": "إغلاق شريط الإعلانات"
+    },
+    "account_information": {
+      "loading_accessibility_message": "جارٍ تحميل معلومات الحساب",
+      "loading_finished_accessibility_message": "تم تحميل معلومات الحساب",
+      "profile_card": {
+        "cancel": "إلغاء",
+        "cancel_accessibility_label": "إلغاء تحرير الملف الشخصي",
+        "edit": "تعديل",
+        "edit_accessibility_label": "تعديل الملف الشخصي",
+        "email_help_text": "لا يمكن تعديل البريد الإلكتروني",
+        "editable_email_help_text": "يُستخدم هذا البريد الإلكتروني لتسجيل الدخول وتحديثات الطلبات.",
+        "first_name": "الاسم الأول",
+        "last_name": "اسم العائلة",
+        "email": "بريد إلكتروني",
+        "no_name_provided_accessibility_label": "لم يتم إضافة اسم",
+        "phone_number_help_text": "لا يمكن تعديل رقم الهاتف",
+        "save": "حفظ",
+        "save_accessibility_label": "حفظ الملف الشخصي",
+        "title": "الملف الشخصي",
+        "errors": {
+          "name_too_long": "{{fieldName}} طويل جدًا (الحد الأقصى هو 255 حرفًا)",
+          "name_cannot_contain_url": "{{fieldName}} لا يمكن أن يحتوي على رابط",
+          "name_cannot_contain_html_tags": "{{fieldName}} لا يمكن أن يحتوي على علامات HTML",
+          "email_cant_be_blank": "البريد الإلكتروني لا يمكن أن يكون فارغًا",
+          "invalid_email_format": "أدخل بريدًا إلكترونيًا صحيحًا"
+        }
+      },
+      "verify_new_email_modal": {
+        "title": "التحقق من البريد الإلكتروني",
+        "description": "أدخل الرمز المرسل إلى {{email}}",
+        "one_time_password_label": "رمز مكون من 6 أرقام",
+        "email_resend_button": "إعادة إرسال الرمز",
+        "email_resend_button_accessibility_label": "إعادة إرسال رمز التحقق",
+        "verify_button": "تحقق",
+        "verify_button_accessibility_label": "التحقق من كلمة المرور لمرة واحدة",
+        "cancel_button": "إلغاء",
+        "cancel_button_accessibility_label": "إلغاء تعديل البريد الإلكتروني",
+        "email_resend_button_success_toast_message": "تم إرسال رمز التحقق",
+        "email_resend_button_failure_banner_message": "تعذّر إرسال رمز التحقق"
+      },
+      "email_update_success_modal": {
+        "title": "التحقق من البريد الإلكتروني",
+        "description": "تم تحديث البريد الإلكتروني بنجاح. يتم إعادة التوجيه إلى صفحة تسجيل الدخول."
+      },
+      "profile_update_confirmation_message": "تم تحديث الملف الشخصي",
+      "email_update_confirmation_message": "تم تحديث البريد الإلكتروني إلى {{email}}",
+      "title": "الملف الشخصي",
+      "people": {
+        "pagination": {
+          "load_more": "تحميل المزيد",
+          "load_more_accessibility_label": "تحميل المزيد من الأشخاص",
+          "loading_accessibility_label": "جارٍ تحميل الأشخاص"
+        }
+      },
+      "add_button": "أضِف"
     }
   }
 }
