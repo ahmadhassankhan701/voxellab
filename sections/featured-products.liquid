@@ -8,7 +8,7 @@
 
 <section class="section section--products" data-section-id="{{ section.id }}">
   <div class="container">
-    <div class="section-header{% if section.settings.heading_style == 'curated' %} section-header--center{% elsif section.settings.heading != blank %} section-header--split{% else %} section-header--split{% endif %}">
+    <div class="block-header{% if section.settings.heading_style == 'curated' %} block-header--center{% else %} block-header--split{% endif %}">
       <h2 class="section-title font-display{% if section.settings.heading_style == 'curated' %} section-title--italic{% endif %}">
         {%- if section.settings.heading != blank -%}
           {{ section.settings.heading }}
