@@ -489,9 +489,24 @@ html[dir="rtl"] .hero__arrow { transform: scaleX(-1); }
 }
 .collection-sidebar.is-open {
   position: fixed; inset: 0; z-index: 50; background: hsl(var(--background));
-  padding: 1.5rem; overflow-y: auto;
+  padding: 1rem 1.25rem 1.5rem;
+  padding-top: max(1rem, env(safe-area-inset-top, 0px));
+  overflow-y: auto;
 }
-.collection-sidebar__mobile-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.collection-sidebar__mobile-header {
+  display: flex; justify-content: flex-end; align-items: center;
+  margin-bottom: 1.25rem;
+}
+.collection-sidebar__close { margin-inline-start: auto; }
+@media (max-width: 767px) {
+  .collection-page .page-header--split { gap: 1.25rem; margin-bottom: 2rem; }
+  .collection-page .page-subtitle { margin-bottom: 0.5rem; }
+  .collection-page .filter-toggle {
+    width: 100%;
+    padding: 0.875rem 1.25rem;
+    margin-top: 0.5rem;
+  }
+}
 .collection-sidebar__heading { font-size: 1.125rem; font-weight: 600; margin: 0 0 1rem; }
 .collection-sidebar__list { list-style: none; padding: 0; margin: 0; }
 .collection-sidebar__block + .collection-sidebar__block { margin-top: 2.5rem; }

@@ -48,8 +48,6 @@
     </button>
   </div>
   <nav class="mobile-menu__nav">
-    <a href="{{ routes.root_url }}">{{ 'header.home' | t }}</a>
-    <a href="{{ routes.all_products_collection_url }}">{{ 'header.shop' | t }}</a>
     {%- for link in linklists[section.settings.menu].links -%}
       <a href="{{ link.url }}">{{ link.title }}</a>
     {%- endfor -%}
