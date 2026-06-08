@@ -1,9 +1,19 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "brand_name_en": "Voxellab",
     "brand_name_ar": "فوكسل لاب",
     "tagline_en": "Crafted, not manufactured.",
     "tagline_ar": "مصنوع، لا مُصنَّع.",
+    "favicon": "shopify://shop_images/favicon.svg",
     "email": "info@voxellab.store",
     "whatsapp_number": "97460002808",
     "instagram_handle": "Voxellab.qa",
