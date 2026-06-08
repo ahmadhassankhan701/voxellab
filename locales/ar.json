@@ -2236,7 +2236,12 @@
       },
       "aria_labels": {
         "close_menu": "إغلاق القائمة",
-        "back_to_main_menu": "العودة إلى القائمة الرئيسية من {{title}}"
+        "back_to_main_menu": "العودة إلى القائمة الرئيسية من {{title}}",
+        "open_submenu": "{{title}}، يفتح قائمة فرعية",
+        "loading_menu": "قائمة التحميل",
+        "account": "حساب",
+        "sign_in_with_email": "تسجيل الدخول بالبريد الإلكتروني",
+        "sign_in": "تسجيل الدخول"
       }
     },
     "payment_methods": {
@@ -2379,6 +2384,131 @@
       "maestro": "المايسترو",
       "dankort": "دانكورت",
       "hipercard": "هايبركارد"
+    },
+    "B2B": {
+      "account_information": {
+        "company_card_name_label": "اسم الشركة",
+        "company_card_section_accessibility_label": "شركة"
+      },
+      "locations": {
+        "contact_email": "بريد إلكتروني",
+        "contact_list_title": "الناس",
+        "contact_name": "الاسم",
+        "contact_permissions": "الأذونات",
+        "contact_phone_number": "رقم الهاتف",
+        "location_picker_label": "اسم الموقع",
+        "location_picker_accessibility_label": "اسم الموقع: {{locationName}}",
+        "net_payment_terms_description": "{{name}}: الدفعات مستحقة خلال {{numberOfDays}} يومًا",
+        "deposit_percentage": "{{percentage}} عربون",
+        "own_role_contact_name": "أنت",
+        "pagination": {
+          "load_more": "تحميل المزيد",
+          "load_more_accessibility_label": "تحميل المزيد من المواقع"
+        },
+        "payment_details_title": "تفاصيل الدفع",
+        "payment_terms": "شروط الدفع",
+        "permissions_label": "أذوناتك",
+        "permissions_title": "الأذونات",
+        "section_title": "الموقع",
+        "shipping_address_required": "أضف عنوان شحن لهذا الموقع لبدء تقديم الطلبات.",
+        "staff_and_permissions_title": "الموظفون والصلاحيات",
+        "tax_details_title": "تفاصيل الضريبة",
+        "tax_id": "الرقم الضريبي",
+        "tax_exemptions": "إعفاءات ضريبية",
+        "multiple_tax_exemptions": "{{taxExemptionsCount}} أخرى",
+        "multiple_tax_exemptions_and": "و",
+        "tax_exemptions_modal_close": "إغلاق",
+        "taxes_none": "لا يوجد",
+        "tax_exemption_not_applicable": "غير متوفر",
+        "tax_exemptions_modal_button_accessibility_label": "عرض جميع الإعفاءات الضريبية"
+      },
+      "location_selection": {
+        "continue_to_store": "استمر في التخزين",
+        "description": "إذا كانت لديك سلع في سلة التسوق بالفعل، فقد يؤثر تغيير المواقع على أسعار سلة التسوق وكمياتها.",
+        "description_switch_later": "يمكنك التبديل لاحقًا في أي وقت",
+        "list_accessibility_label": "قائمة المواقع",
+        "list_item_without_address_accessibility_label": "{{name}}: لا يوجد عنوان",
+        "list_loading_accessibility_message": "جارٍ تحميل قائمة المواقع",
+        "list_loading_finished_accessibility_message": "تم تحميل قائمة المواقع",
+        "loading_store_accessibility_message": "ذاهب إلى المتجر",
+        "no_location_title": "للطلبات الشخصية فقط",
+        "no_location_description": "لم يعد لديك إذن بوضع طلبات لـ {{company}}. لا يزال بإمكانك وضع طلبات شخصية.",
+        "no_locations_found": "لم يتم العثور على مواقع",
+        "search": "البحث عن المواقع",
+        "search_location_title": "حدد موقعًا",
+        "selection_cancel_button": "إلغاء",
+        "selection_confirmation_button": "اختر موقعًا",
+        "selection_continue_button": "استمر/استمروا",
+        "title": "ما هو الموقع الذي تشتري لأجله؟",
+        "title_choose_location": "اختر موقعًا",
+        "clear_search": "مسح البحث",
+        "try_new_search": "جرّب بحثًا جديدًا"
+      },
+      "addresses": {
+        "add_billing_address_button": "إضافة عنوان الفوترة",
+        "add_billing_address_section_accessibility_label": "إضافة عنوان الفوترة",
+        "add_shipping_address_button": "أضف عنوان الشحن",
+        "add_shipping_address_section_accessibility_label": "أضف عنوان الشحن",
+        "billing_address_card_title": "عنوان الفواتير",
+        "cancel_adding_billing_address_accessibility_label": "إلغاء إضافة عنوان الفواتير",
+        "cancel_adding_shipping_address_accessibility_label": "إلغاء إضافة عنوان الشحن",
+        "save_new_billing_address_accessibility_label": "حفظ عنوان الفواتير",
+        "save_new_shipping_address_accessibility_label": "حفظ عنوان الشحن",
+        "shipping_address_card_title": "عنوان الشحن"
+      },
+      "orders": {
+        "draft_order_list": {
+          "hide_all": "إخفاء الكل",
+          "show_all": "إظهار الكل",
+          "hide_all_accessibility_label": "إخفاء جميع الطلبات قيد المراجعة",
+          "show_all_accessibility_label": "إظهار جميع الطلبات قيد المراجعة",
+          "show_all_orders_in_review": "إظهار جميع الطلبات قيد المراجعة",
+          "show_less_orders_in_review": "إظهار عدد أقل من الطلبات في المراجعة",
+          "title": "قيد الانتظار",
+          "pending_tab_accessibility_label": {
+            "no_pending_orders": "ليس لديك أي طلبات معلقة",
+            "pending_orders": {
+              "one": "لديك {{count}} طلب قيد الانتظار",
+              "other": "لديك {{count}} طلبات معلقة"
+            },
+            "more_than_pagination_length": "لديك أكثر من {{count}} طلبات قيد الانتظار"
+          },
+          "pagination": {
+            "nav_accessibility_label": "أزرار التنقل في شاشة \"الطلبات قيد المراجعة\""
+          }
+        },
+        "order_list_column_headers_location": "الموقع",
+        "order_list_column_headers_contact": "جهات الاتصال",
+        "order_list_column_headers_status": "الحالة",
+        "removed_company_contact_tooltip": "تم فصله من الشركة"
+      },
+      "draft_order_details": {
+        "draft_order_subtitle": "تأكيد {{date}} من الطلب {{draftOrderName}}",
+        "loading": "جاري تحميل تفاصيل الطلب",
+        "loading_finished_accessibility_message": "تم تحميل تفاصيل الطلب",
+        "payment_status": {
+          "pending": {
+            "banner_overdue": {
+              "one": "دفعتك متأخرة {{count}} يوم",
+              "other": "فاتورة الدفع الخاصة بك متأخرة {{count}} أيام"
+            },
+            "banner_due": {
+              "one": "مدفوعاتك مستحقة خلال {{count}} يوم",
+              "other": "تاريخ استحقاق دفعتك بعد {{count}} أيام"
+            },
+            "banner_due_today": "تاريخ استحقاق دفعتك اليوم",
+            "banner_due_today_for_multiple_fulfillments": "تاريخ الاستحقاق اليوم لعدد {{count}} طلبًا منفذًا",
+            "banner_overdue_for_multiple_fulfillments": "الدفع مستحق مقابل {{count}} طلبًا منفّذًا",
+            "title": "الدفع مستحق",
+            "title_with_date": "تاريخ الاستحقاق {{date}}",
+            "title_due_on_receipt": "الدفع غير مستحق بعد",
+            "title_due_on_fulfillment": "الدفع مستحق عند الإنجاز",
+            "description_overdue": "دفعك متأخر.",
+            "description_partially_paid": "تم دفع جزء من هذا الطلب. لديك رصيد متبقٍ.",
+            "description_authorized": "سيتم خصم الدفعة من طريقة الدفع الخاصة بك في تاريخ الاستحقاق، أو يمكنك الدفع الآن."
+          }
+        }
+      }
     }
   }
 }
