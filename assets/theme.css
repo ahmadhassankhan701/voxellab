@@ -159,15 +159,44 @@ html[dir="ltr"] .font-display { font-family: 'Sora', sans-serif; }
 .nav-link:hover, .nav-link--active { color: hsl(var(--primary)); }
 
 .brand-lockup { display: flex; align-items: center; gap: 0.75rem; }
-.brand-lockup__mark { width: 2rem; height: 2rem; color: hsl(var(--foreground)); }
+.brand-lockup__mark { width: 2rem; height: 2rem; color: hsl(var(--foreground)); flex-shrink: 0; }
 .brand-lockup__text { display: flex; flex-direction: column; line-height: 1; }
-.brand-lockup__name { font-family: inherit; font-weight: 700; font-size: 1.25rem; letter-spacing: -0.02em; }
+.brand-lockup__name {
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+.brand-lockup__name--en {
+  font-family: 'Sora', sans-serif;
+  display: none;
+}
 .brand-lockup__name--ar {
+  font-family: 'Reem Kufi', sans-serif;
   font-size: 1.375rem;
   letter-spacing: 0;
   line-height: 1.2;
+  display: none;
 }
-.brand-lockup__sub { font-size: 0.625rem; color: hsl(var(--muted-foreground)); margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.brand-lockup__sub {
+  font-size: 0.625rem;
+  color: hsl(var(--muted-foreground));
+  margin-top: 0.25rem;
+  letter-spacing: 0.02em;
+  display: none;
+}
+.brand-lockup__sub--en {
+  font-family: 'Reem Kufi', sans-serif;
+  font-size: 0.6875rem;
+}
+/* English: Voxellab + Arabic subtitle */
+html[dir="ltr"] .brand-lockup__name--en,
+html[dir="ltr"] .brand-lockup__sub--en {
+  display: block;
+}
+/* Arabic: فوكسل لاب only */
+html[dir="rtl"] .brand-lockup__name--ar {
+  display: block;
+}
 
 .cart-link { position: relative; }
 .cart-count {

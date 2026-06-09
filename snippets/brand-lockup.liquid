@@ -1,22 +1,11 @@
 {%- liquid
-  assign is_ar = false
-  if request.locale.iso_code == 'ar'
-    assign is_ar = true
-  elsif localization.language.iso_code == 'ar'
-    assign is_ar = true
-  endif
-
-  assign name_ar = settings.brand_name_ar | default: 'فوكسل لاب'
   assign name_en = settings.brand_name_en | default: 'Voxellab'
 -%}
-<div class="brand-lockup {{ class }}{% if is_ar %} brand-lockup--ar{% endif %}">
+<div class="brand-lockup {{ class }}">
   {% render 'logo-mark', class: 'brand-lockup__mark' %}
   <div class="brand-lockup__text">
-    {% if is_ar %}
-      <span class="brand-lockup__name brand-lockup__name--ar">{{ name_ar }}</span>
-    {% else %}
-      <span class="brand-lockup__name">{{ name_en }}</span>
-      <span class="brand-lockup__sub">{{ name_ar }}</span>
-    {% endif %}
+    <span class="brand-lockup__name brand-lockup__name--en">{{ name_en }}</span>
+    <span class="brand-lockup__name brand-lockup__name--ar" lang="ar">فوكسل لاب</span>
+    <span class="brand-lockup__sub brand-lockup__sub--en" lang="ar">فوكسل لاب</span>
   </div>
 </div>
