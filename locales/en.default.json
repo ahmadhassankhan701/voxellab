@@ -104,6 +104,15 @@
     "email": "Email",
     "location": "Location"
   },
+  "search": {
+    "title": "Search",
+    "subtitle": "Find pieces from our collection.",
+    "placeholder": "Search products…",
+    "submit": "Search",
+    "no_results": "No results for \"{{ terms }}\".",
+    "results_count": "{{ count }} results",
+    "browse_shop": "Browse the shop"
+  },
   "404": {
     "title": "Page not found",
     "body": "The page you're looking for doesn't exist.",

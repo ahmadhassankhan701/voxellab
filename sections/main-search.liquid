@@ -1,0 +1,83 @@
+<section class="page-section search-page" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="page-header search-page__header">
+      <h1 class="page-title font-display">{{ 'search.title' | t }}</h1>
+      <p class="page-subtitle">{{ 'search.subtitle' | t }}</p>
+    </div>
+
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+      <input type="hidden" name="type" value="product">
+      <label class="visually-hidden" for="SearchInput">{{ 'search.placeholder' | t }}</label>
+      <div class="search-form__field">
+        <svg class="search-form__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input
+          id="SearchInput"
+          class="search-form__input"
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ 'search.placeholder' | t }}"
+          autocomplete="off"
+          {% if search.performed == false %}autofocus{% endif %}
+        >
+      </div>
+      <button type="submit" class="btn btn--primary btn--pill search-form__submit">
+        {{ 'search.submit' | t }}
+      </button>
+    </form>
+
+    {%- if search.performed -%}
+      {%- if search.results_count == 0 -%}
+        <div class="empty-state search-page__empty">
+          <p>{{ 'search.no_results' | t: terms: search.terms }}</p>
+          <a href="{{ routes.all_products_collection_url }}" class="btn btn--link">{{ 'search.browse_shop' | t }}</a>
+        </div>
+      {%- else -%}
+        <p class="search-page__count">{{ 'search.results_count' | t: count: search.results_count }}</p>
+
+        {%- paginate search.results by section.settings.results_per_page -%}
+          <div class="products-grid products-grid--3">
+            {%- for item in search.results -%}
+              {%- if item.object_type == 'product' -%}
+                {% render 'product-card', product_ref: item %}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          {%- if paginate.pages > 1 -%}
+            <nav class="pagination" aria-label="Pagination">
+              {%- if paginate.previous -%}
+                <a href="{{ paginate.previous.url }}" class="btn btn--outline">{{ 'general.pagination.previous' | t }}</a>
+              {%- endif -%}
+              <span class="pagination__info">{{ paginate.current_page }} / {{ paginate.pages }}</span>
+              {%- if paginate.next -%}
+                <a href="{{ paginate.next.url }}" class="btn btn--outline">{{ 'general.pagination.next' | t }}</a>
+              {%- endif -%}
+            </nav>
+          {%- endif -%}
+        {%- endpaginate -%}
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search",
+  "tag": "section",
+  "class": "section-main-search",
+  "settings": [
+    {
+      "type": "range",
+      "id": "results_per_page",
+      "min": 8,
+      "max": 36,
+      "step": 4,
+      "default": 12,
+      "label": "Results per page"
+    }
+  ]
+}
+{% endschema %}
