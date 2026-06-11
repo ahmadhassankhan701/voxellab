@@ -47,14 +47,22 @@
                     <button type="button" class="quantity-selector__btn" data-line-qty-plus data-line="{{ forloop.index }}" aria-label="Increase">+</button>
                   </div>
 
-                  {%- if settings.show_prices -%}
-                    <div class="cart-item__price">
-                      <span class="cart-item__price-total">{{ item.final_line_price | money }}</span>
-                      {%- if item.quantity > 1 -%}
-                        <span class="cart-item__price-each">{{ item.final_price | money }} {{ 'cart.each' | t }}</span>
+                  <div class="cart-item__price">
+                    <div class="cart-item__price-line">
+                      {%- if item.original_line_price > item.final_line_price -%}
+                        <s class="cart-item__price-compare">{{ item.original_line_price | money }}</s>
                       {%- endif -%}
+                      <span class="cart-item__price-total">{{ item.final_line_price | money }}</span>
                     </div>
-                  {%- endif -%}
+                    {%- if item.quantity > 1 -%}
+                      <span class="cart-item__price-each">{{ item.final_price | money }} {{ 'cart.each' | t }}</span>
+                    {%- elsif item.original_price > item.final_price -%}
+                      <span class="cart-item__price-each">
+                        <s>{{ item.original_price | money }}</s>
+                        {{ item.final_price | money }}
+                      </span>
+                    {%- endif -%}
+                  </div>
                 </div>
               </div>
             </div>
@@ -69,24 +77,20 @@
               <span>{{ 'cart.items' | t }}</span>
               <span>{{ cart.item_count }}</span>
             </div>
-            {%- if settings.show_prices -%}
-              <div class="cart-summary__row">
-                <span>{{ 'cart.subtotal' | t }}</span>
-                <span>{{ cart.total_price | money }}</span>
-              </div>
-            {%- endif -%}
+            <div class="cart-summary__row">
+              <span>{{ 'cart.subtotal' | t }}</span>
+              <span>{{ cart.total_price | money }}</span>
+            </div>
             <div class="cart-summary__row">
               <span>{{ 'cart.shipping' | t }}</span>
               <span class="cart-summary__note">{{ 'cart.shipping_note' | t }}</span>
             </div>
           </div>
 
-          {%- if settings.show_prices -%}
-            <div class="cart-summary__total">
-              <span class="font-display">{{ 'cart.total' | t }}</span>
-              <span class="cart-summary__total-price">{{ cart.total_price | money }}</span>
-            </div>
-          {%- endif -%}
+          <div class="cart-summary__total">
+            <span class="font-display">{{ 'cart.total' | t }}</span>
+            <span class="cart-summary__total-price">{{ cart.total_price | money }}</span>
+          </div>
 
           <button type="submit" name="checkout" class="btn btn--primary btn--lg btn--pill btn--full">{{ 'cart.checkout' | t }}</button>
           <a href="{{ routes.all_products_collection_url }}" class="cart-summary__continue">{{ 'cart.continue_shopping' | t }}</a>

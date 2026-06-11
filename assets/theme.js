@@ -109,6 +109,94 @@
     });
   }
 
+  function formatMoney(cents) {
+    var amount = (cents / 100).toFixed(2);
+    var format = window.themeMoneyFormat || '{{amount}}';
+    return format.replace(/\{\{\s*amount\s*\}\}/, amount).replace(/\{\{\s*amount_no_decimals\s*\}\}/, Math.round(cents / 100));
+  }
+
+  function initProductVariants() {
+    var form = document.querySelector('.product-form');
+    var variantsJson = document.querySelector('[data-product-variants]');
+    if (!form || !variantsJson) return;
+
+    var variants;
+    try {
+      variants = JSON.parse(variantsJson.textContent);
+    } catch (e) {
+      return;
+    }
+
+    var priceCurrent = document.querySelector('[data-price-current]');
+    var priceCompare = document.querySelector('[data-price-compare]');
+    var saleBadge = document.querySelector('[data-product-sale-badge]');
+    var idInput = form.querySelector('input[name="id"]');
+    var selects = form.querySelectorAll('select[name^="options"]');
+
+    function getSelectedOptions() {
+      return Array.from(selects).map(function (select) {
+        return select.value;
+      });
+    }
+
+    function findVariant() {
+      var options = getSelectedOptions();
+      return variants.find(function (variant) {
+        return variant.options.every(function (value, index) {
+          return value === options[index];
+        });
+      });
+    }
+
+    function updateVariantUI(variant) {
+      if (!variant || !priceCurrent) return;
+      if (idInput) idInput.value = variant.id;
+      priceCurrent.textContent = formatMoney(variant.price);
+
+      if (priceCompare) {
+        if (variant.compare_at_price && variant.compare_at_price > variant.price) {
+          priceCompare.textContent = formatMoney(variant.compare_at_price);
+          priceCompare.classList.remove('hidden');
+        } else {
+          priceCompare.classList.add('hidden');
+        }
+      }
+
+      if (saleBadge) {
+        if (variant.compare_at_price && variant.compare_at_price > variant.price) {
+          var discount = Math.round(
+            ((variant.compare_at_price - variant.price) / variant.compare_at_price) * 100
+          );
+          saleBadge.textContent = '-' + discount + '%';
+          saleBadge.classList.remove('hidden');
+        } else {
+          saleBadge.classList.add('hidden');
+        }
+      }
+
+      var submit = form.querySelector('.product-form__submit');
+      var submitLabel = form.querySelector('[data-submit-label]');
+      if (submit) {
+        submit.disabled = !variant.available;
+      }
+      if (submitLabel) {
+        submitLabel.textContent = variant.available
+          ? (submit && submit.getAttribute('data-label-available')) || submitLabel.textContent
+          : (submit && submit.getAttribute('data-label-sold-out')) || 'Sold Out';
+      }
+    }
+
+    if (selects.length) {
+      selects.forEach(function (select) {
+        select.addEventListener('change', function () {
+          updateVariantUI(findVariant());
+        });
+      });
+    }
+
+    updateVariantUI(findVariant() || variants[0]);
+  }
+
   function initProductGallery() {
     var mainImage = document.getElementById('ProductMainImage');
     if (!mainImage) return;
@@ -136,5 +224,6 @@
     initCollectionFilters();
     initQuantity();
     initProductGallery();
+    initProductVariants();
   });
 })();

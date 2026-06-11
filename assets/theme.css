@@ -470,9 +470,17 @@ html[dir="rtl"] .hero__arrow { transform: scaleX(-1); }
   transition: color 0.2s;
 }
 .product-card:hover .product-card__title { color: hsl(var(--primary)); }
-.product-card__price { display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.875rem; }
-.product-card__price-compare { color: hsl(var(--muted-foreground)); text-decoration: line-through; opacity: 0.7; }
+.price-display {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  font-size: 0.875rem; flex-wrap: wrap;
+}
+.price-display__compare,
+.product-card__price-compare {
+  color: hsl(var(--muted-foreground)); text-decoration: line-through; opacity: 0.7;
+}
+.price-display__current,
 .product-card__price-current { font-weight: 600; color: hsl(var(--primary)); }
+.product-card__price { display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.875rem; }
 
 .badge {
   position: absolute; z-index: 10; font-size: 0.75rem; font-weight: 700;
@@ -712,8 +720,17 @@ html[dir="rtl"] .hero__arrow { transform: scaleX(-1); }
 .cart-item__remove:hover { color: hsl(var(--destructive)); }
 .cart-item__footer { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 1rem; }
 .cart-item__price { text-align: end; }
-.cart-item__price-total { font-size: 1.125rem; font-weight: 700; color: hsl(var(--primary)); display: block; }
-.cart-item__price-each { font-size: 0.75rem; color: hsl(var(--muted-foreground)); }
+.cart-item__price-line {
+  display: flex; align-items: baseline; justify-content: flex-end; gap: 0.5rem; flex-wrap: wrap;
+}
+.cart-item__price-compare {
+  font-size: 0.875rem; color: hsl(var(--muted-foreground)); text-decoration: line-through; opacity: 0.75;
+}
+.cart-item__price-total { font-size: 1.125rem; font-weight: 700; color: hsl(var(--primary)); }
+.cart-item__price-each {
+  display: block; margin-top: 0.25rem; font-size: 0.75rem; color: hsl(var(--muted-foreground));
+}
+.cart-item__price-each s { margin-inline-end: 0.35rem; opacity: 0.75; }
 .cart-summary {
   background: hsl(var(--card)); border: 1px solid hsl(var(--border)); border-radius: 1rem;
   padding: 1.5rem; position: sticky; top: 6rem; align-self: start;

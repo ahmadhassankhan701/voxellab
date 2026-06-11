@@ -19,7 +19,7 @@
     "instagram_handle": "Voxellab.qa",
     "location_en": "Doha, Qatar",
     "location_ar": "الدوحة، قطر",
-    "show_prices": false,
+    "show_prices": true,
     "show_weight": false,
     "show_designer": false,
     "color_primary": "#8B5A3C",

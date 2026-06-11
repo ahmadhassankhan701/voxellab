@@ -83,7 +83,7 @@
         "type": "checkbox",
         "id": "show_prices",
         "label": "Show prices",
-        "default": false
+        "default": true
       },
       {
         "type": "checkbox",

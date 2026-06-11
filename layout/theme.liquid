@@ -47,6 +47,10 @@
     }
   </style>
 
+  <script>
+    window.themeMoneyFormat = {{ shop.money_format | json }};
+    window.themeCurrency = {{ shop.currency | json }};
+  </script>
   <script src="{{ 'theme.js' | asset_url }}" defer></script>
 </head>
 

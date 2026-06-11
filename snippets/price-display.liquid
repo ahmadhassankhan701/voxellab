@@ -1,0 +1,21 @@
+{%- liquid
+  assign price_item = item
+  if price_item == blank and variant != blank
+    assign price_item = variant
+  endif
+  if price_item == blank and product_ref != blank
+    assign price_item = product_ref
+  endif
+
+  assign current_price = price_item.price
+  assign compare_price = price_item.compare_at_price
+-%}
+
+{%- if current_price != blank -%}
+  <div class="price-display {{ class }}">
+    {%- if compare_price > current_price -%}
+      <s class="price-display__compare">{{ compare_price | money }}</s>
+    {%- endif -%}
+    <span class="price-display__current">{{ current_price | money }}</span>
+  </div>
+{%- endif -%}

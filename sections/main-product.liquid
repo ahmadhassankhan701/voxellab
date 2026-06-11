@@ -13,9 +13,12 @@
     <div class="product-layout">
       <div class="product-gallery">
         <div class="product-gallery__main">
-          {%- if product.compare_at_price > product.price and settings.show_prices -%}
-            {%- assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
-            <span class="badge badge--sale badge--lg">-{{ discount }}%</span>
+          {%- assign current_variant = product.selected_or_first_available_variant -%}
+          {%- if current_variant.compare_at_price > current_variant.price -%}
+            {%- assign discount = current_variant.compare_at_price | minus: current_variant.price | times: 100.0 | divided_by: current_variant.compare_at_price | round -%}
+            <span class="badge badge--sale badge--lg" data-product-sale-badge>-{{ discount }}%</span>
+          {%- else -%}
+            <span class="badge badge--sale badge--lg hidden" data-product-sale-badge hidden>-0%</span>
           {%- endif -%}
           {%- if product.metafields.custom.badge != blank -%}
             <span class="badge badge--primary badge--lg">{{ product.metafields.custom.badge }}</span>
@@ -59,14 +62,15 @@
 
         <h1 class="product-title font-display">{{ product.title }}</h1>
 
-        {%- if settings.show_prices -%}
-          <div class="product-price">
-            <span class="product-price__current">{{ product.price | money }}</span>
-            {%- if product.compare_at_price > product.price -%}
-              <s class="product-price__compare">{{ product.compare_at_price | money }}</s>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
+        <div class="product-price" data-product-price>
+          <span class="product-price__current" data-price-current>{{ current_variant.price | money }}</span>
+          <s
+            class="product-price__compare{% unless current_variant.compare_at_price > current_variant.price %} hidden{% endunless %}"
+            data-price-compare
+          >{{ current_variant.compare_at_price | money }}</s>
+        </div>
+
+        <script type="application/json" data-product-variants>{{ product.variants | json }}</script>
 
         <div class="product-description rte">
           {%- if product.description != blank -%}
@@ -99,13 +103,21 @@
               <button type="button" class="quantity-selector__btn" data-qty-plus aria-label="Increase quantity">+</button>
             </div>
 
-            <button type="submit" class="btn btn--primary btn--lg btn--pill product-form__submit"{% unless product.selected_or_first_available_variant.available %} disabled{% endunless %}>
+            <button
+              type="submit"
+              class="btn btn--primary btn--lg btn--pill product-form__submit"
+              data-label-available="{{ 'product.add_to_cart' | t }}"
+              data-label-sold-out="{{ 'product.sold_out' | t }}"
+              {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+            >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-              {%- if product.selected_or_first_available_variant.available -%}
-                {{ 'product.add_to_cart' | t }}
-              {%- else -%}
-                {{ 'product.sold_out' | t }}
-              {%- endif -%}
+              <span data-submit-label>
+                {%- if product.selected_or_first_available_variant.available -%}
+                  {{ 'product.add_to_cart' | t }}
+                {%- else -%}
+                  {{ 'product.sold_out' | t }}
+                {%- endif -%}
+              </span>
             </button>
           </div>
         {% endform %}
