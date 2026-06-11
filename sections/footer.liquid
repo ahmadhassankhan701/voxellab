@@ -1,14 +1,11 @@
 {%- liquid
-  assign brand_tagline = settings.tagline_en
   assign brand_location = settings.location_en
   assign is_ar = false
   if request.locale.iso_code == 'ar'
     assign is_ar = true
-    assign brand_tagline = settings.tagline_ar
     assign brand_location = settings.location_ar
   elsif localization.language.iso_code == 'ar'
     assign is_ar = true
-    assign brand_tagline = settings.tagline_ar
     assign brand_location = settings.location_ar
   endif
 -%}
@@ -18,7 +15,6 @@
     <div class="site-footer__grid">
       <div class="site-footer__brand">
         {% render 'brand-lockup', class: 'site-footer__logo' %}
-        <p class="site-footer__tagline">{{ brand_tagline }}</p>
         {%- if settings.instagram_handle != blank -%}
           <a href="https://instagram.com/{{ settings.instagram_handle }}" class="site-footer__social" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg>
@@ -33,7 +29,7 @@
           <li><a href="{{ routes.search_url }}">{{ 'search.title' | t }}</a></li>
           {%- for link in linklists[section.settings.menu].links -%}
             {%- unless link.url contains '/search' -%}
-              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              <li><a href="{{ link.url }}">{% render 'menu-link-label', link: link %}</a></li>
             {%- endunless -%}
           {%- endfor -%}
         </ul>
@@ -60,9 +56,9 @@
     <div class="site-footer__bottom">
       <p>&copy; {{ 'now' | date: '%Y' }}
         {%- if is_ar -%}
-          {{ settings.brand_name_ar | default: 'فوكسل لاب' }}
+          فوكسل لاب
         {%- else -%}
-          {{ settings.brand_name_en | default: 'Voxellab' }}
+          Voxellab
         {%- endif -%}.
         {{ 'footer.rights' | t }}
       </p>

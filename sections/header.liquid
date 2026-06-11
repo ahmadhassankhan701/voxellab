@@ -19,7 +19,7 @@
 
       <nav class="site-header__nav" aria-label="Main">
         {%- for link in linklists[section.settings.menu].links -%}
-          <a href="{{ link.url }}" class="nav-link{% if link.active %} nav-link--active{% endif %}">{{ link.title }}</a>
+          <a href="{{ link.url }}" class="nav-link{% if link.active %} nav-link--active{% endif %}">{% render 'menu-link-label', link: link %}</a>
         {%- endfor -%}
       </nav>
 
@@ -49,7 +49,7 @@
   </div>
   <nav class="mobile-menu__nav">
     {%- for link in linklists[section.settings.menu].links -%}
-      <a href="{{ link.url }}">{{ link.title }}</a>
+      <a href="{{ link.url }}">{% render 'menu-link-label', link: link %}</a>
     {%- endfor -%}
   </nav>
 </div>

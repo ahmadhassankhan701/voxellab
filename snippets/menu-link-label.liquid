@@ -1,0 +1,17 @@
+{%- liquid
+  assign label = link.title
+
+  if link.type == 'page_link'
+    case link.object.handle
+      when 'about'
+        assign label = 'header.about' | t
+      when 'contact'
+        assign label = 'header.contact' | t
+    endcase
+  elsif link.url == routes.root_url
+    assign label = 'header.home' | t
+  elsif link.url == routes.all_products_collection_url
+    assign label = 'header.shop' | t
+  endif
+-%}
+{{- label -}}
