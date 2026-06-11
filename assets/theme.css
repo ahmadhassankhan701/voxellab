@@ -225,6 +225,11 @@ html[dir="rtl"] .brand-lockup__name--ar {
 .mobile-menu__nav a {
   font-size: 1.5rem; font-weight: 500; text-decoration: none; color: hsl(var(--foreground));
 }
+.mobile-menu__search {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  font-size: 1.5rem; font-weight: 500; text-decoration: none; color: hsl(var(--foreground));
+}
+.mobile-menu__search svg { flex-shrink: 0; opacity: 0.85; }
 
 /* Footer */
 .site-footer {
