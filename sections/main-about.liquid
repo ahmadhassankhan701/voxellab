@@ -1,7 +1,10 @@
 <section class="page-section about-page" data-section-id="{{ section.id }}">
   <div class="about-hero">
     <div class="container container--narrow">
-      <p class="about-hero__eyebrow">{{ 'about.eyebrow' | t }}</p>
+      {%- assign about_eyebrow = 'about.eyebrow' | t -%}
+      {%- if about_eyebrow != blank -%}
+        <p class="about-hero__eyebrow">{{ about_eyebrow }}</p>
+      {%- endif -%}
       <h1 class="about-hero__title font-display">{{ 'about.title' | t }}</h1>
       <p class="about-hero__intro">{%- if section.settings.intro != blank -%}{{ section.settings.intro }}{%- else -%}{{ 'about.intro' | t }}{%- endif -%}</p>
     </div>
