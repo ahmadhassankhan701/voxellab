@@ -2,10 +2,6 @@
   <div class="container">
     <div class="brand-story">
       <div class="brand-story__content">
-        <h2 class="brand-story__title font-display">
-          {%- if section.settings.title_line1 != blank -%}{{ section.settings.title_line1 }}{%- else -%}{{ 'home.about_title_line1' | t }}{%- endif -%}<br>
-          <span class="font-accent">{%- if section.settings.title_line2 != blank -%}{{ section.settings.title_line2 }}{%- else -%}{{ 'home.about_title_line2' | t }}{%- endif -%}</span>
-        </h2>
         <p class="brand-story__body">
           {%- if section.settings.body != blank -%}{{ section.settings.body }}{%- else -%}{{ 'home.about_body' | t }}{%- endif -%}
         </p>
@@ -34,16 +30,6 @@
   "tag": "section",
   "class": "section-brand-story",
   "settings": [
-    {
-      "type": "text",
-      "id": "title_line1",
-      "label": "Title line 1"
-    },
-    {
-      "type": "text",
-      "id": "title_line2",
-      "label": "Title line 2"
-    },
     {
       "type": "textarea",
       "id": "body",
