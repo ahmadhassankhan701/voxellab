@@ -23,7 +23,10 @@
       "type": "featured-collections",
       "settings": {
         "collection_list": [
-          "bath"
+          "bath",
+          "desk-stationary",
+          "lighting",
+          "planters"
         ],
         "collections_to_show": 4
       }
