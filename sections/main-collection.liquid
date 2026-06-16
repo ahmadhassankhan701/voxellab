@@ -39,15 +39,14 @@
               </a>
             </li>
             {%- for coll in collections -%}
-              {%- capture visible -%}{% render 'collection-is-visible', collection: coll %}{%- endcapture -%}
-              {%- assign visible = visible | strip -%}
-              {%- if visible == 'yes' -%}
-                <li>
+              {%- if coll.handle == 'frontpage' or coll.all_products_count == 0 -%}
+                {%- continue -%}
+              {%- endif -%}
+              <li>
                   <a href="{{ coll.url }}" class="sidebar-link{% if coll.handle == collection.handle %} sidebar-link--active{% endif %}">
                     {{ coll.title }} <span class="sidebar-link__count">({{ coll.all_products_count }})</span>
                   </a>
                 </li>
-              {%- endif -%}
             {%- endfor -%}
           </ul>
         </div>
@@ -82,11 +81,10 @@
           {%- else -%}
             <div class="products-grid products-grid--3">
               {%- for product in collection.products -%}
-                {%- capture listable -%}{% render 'product-is-listable', product: product %}{%- endcapture -%}
-                {%- assign listable = listable | strip -%}
-                {%- if listable == 'yes' -%}
-                  {% render 'product-card', product_ref: product %}
+                {%- if product.tags contains 'test' or product.tags contains 'demo' or product.tags contains 'hidden' -%}
+                  {%- continue -%}
                 {%- endif -%}
+                {% render 'product-card', product_ref: product %}
               {%- endfor -%}
             </div>
 

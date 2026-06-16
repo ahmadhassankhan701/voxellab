@@ -1,8 +1,0 @@
-{%- liquid
-  assign listable = 'yes'
-
-  if product.tags contains 'test' or product.tags contains 'demo' or product.tags contains 'hidden'
-    assign listable = 'no'
-  endif
--%}
-{{- listable -}}

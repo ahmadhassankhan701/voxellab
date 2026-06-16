@@ -1,10 +1,9 @@
 {%- liquid
-  assign collection = collections[section.settings.collection]
-  if collection == blank
-    assign collection = collections.all
+  assign featured_collection = section.settings.collection
+  if featured_collection == blank
+    assign featured_collection = collections.all
   endif
   assign products_to_show = section.settings.products_to_show | default: 4
-  assign shown_count = 0
 -%}
 
 <section class="section section--products" data-section-id="{{ section.id }}">
@@ -20,7 +19,7 @@
         {%- endif -%}
       </h2>
       {%- unless section.settings.heading_style == 'curated' -%}
-      <a href="{{ collection.url | default: routes.all_products_collection_url }}" class="section-link hidden-mobile">
+      <a href="{{ featured_collection.url | default: routes.all_products_collection_url }}" class="section-link hidden-mobile">
         {{ 'home.view_all' | t }}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -28,21 +27,16 @@
     </div>
 
     <div class="products-grid products-grid--4">
-      {%- for product in collection.products -%}
-        {%- if shown_count >= products_to_show -%}
-          {%- break -%}
+      {%- for product in featured_collection.products limit: products_to_show -%}
+        {%- if product.tags contains 'test' or product.tags contains 'demo' or product.tags contains 'hidden' -%}
+          {%- continue -%}
         {%- endif -%}
-        {%- capture listable -%}{% render 'product-is-listable', product: product %}{%- endcapture -%}
-        {%- assign listable = listable | strip -%}
-        {%- if listable == 'yes' -%}
-          {% render 'product-card', product_ref: product %}
-          {%- assign shown_count = shown_count | plus: 1 -%}
-        {%- endif -%}
+        {% render 'product-card', product_ref: product %}
       {%- endfor -%}
     </div>
 
     <div class="section-footer-mobile">
-      <a href="{{ collection.url | default: routes.all_products_collection_url }}" class="btn btn--outline btn--pill">
+      <a href="{{ featured_collection.url | default: routes.all_products_collection_url }}" class="btn btn--outline btn--pill">
         {{ 'home.view_all' | t }}
       </a>
     </div>

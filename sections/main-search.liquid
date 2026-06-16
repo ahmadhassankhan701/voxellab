@@ -41,11 +41,10 @@
           <div class="products-grid products-grid--3">
             {%- for item in search.results -%}
               {%- if item.object_type == 'product' -%}
-                {%- capture listable -%}{% render 'product-is-listable', product: item %}{%- endcapture -%}
-                {%- assign listable = listable | strip -%}
-                {%- if listable == 'yes' -%}
-                  {% render 'product-card', product_ref: item %}
+                {%- if item.tags contains 'test' or item.tags contains 'demo' or item.tags contains 'hidden' -%}
+                  {%- continue -%}
                 {%- endif -%}
+                {% render 'product-card', product_ref: item %}
               {%- endif -%}
             {%- endfor -%}
           </div>
