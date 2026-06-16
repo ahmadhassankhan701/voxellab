@@ -1,6 +1,6 @@
 <section class="section section--brand-story" data-section-id="{{ section.id }}">
   <div class="container">
-    <div class="brand-story">
+    <div class="brand-story brand-story--centered">
       <div class="brand-story__content">
         <p class="brand-story__body">
           {%- if section.settings.body != blank -%}{{ section.settings.body }}{%- else -%}{{ 'home.about_body' | t }}{%- endif -%}
@@ -8,17 +8,6 @@
         <a href="{{ section.settings.button_link | default: '/pages/about' }}" class="btn btn--inverse btn--pill">
           {{ 'home.discover_story' | t }}
         </a>
-      </div>
-      <div class="brand-story__media">
-        {%- if section.settings.image != blank -%}
-          {{
-            section.settings.image
-            | image_url: width: 1200
-            | image_tag: loading: 'lazy', alt: section.settings.image.alt
-          }}
-        {%- else -%}
-          {{ 'lifestyle-1' | placeholder_svg_tag }}
-        {%- endif -%}
       </div>
     </div>
   </div>
@@ -34,11 +23,6 @@
       "type": "textarea",
       "id": "body",
       "label": "Body text"
-    },
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image"
     },
     {
       "type": "url",

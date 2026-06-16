@@ -498,13 +498,18 @@ html[dir="rtl"] .hero__arrow { transform: scaleX(-1); }
 /* Brand story */
 .section--brand-story { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
 .brand-story {
-  display: grid; gap: 3rem; align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-@media (min-width: 768px) { .brand-story { grid-template-columns: 1fr 1fr; } }
-.brand-story__title { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 700; line-height: 1.2; margin: 0 0 1.5rem; }
+.brand-story--centered .brand-story__content {
+  max-width: 36rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .brand-story__body { opacity: 0.8; font-size: 1.125rem; line-height: 1.6; max-width: 28rem; margin: 0 0 2rem; }
-.brand-story__media { aspect-ratio: 4/3; border-radius: 1rem; overflow: hidden; }
-.brand-story__media img, .brand-story__media svg { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* Page layouts */
 .page-section { padding-top: 2rem; padding-bottom: 6rem; }

@@ -1,3 +1,25 @@
+{%- liquid
+  assign collections_to_show = section.settings.collections_to_show | default: 4
+  assign visible_count = 0
+-%}
+
+{%- if section.settings.collection_list != blank -%}
+  {%- for coll in section.settings.collection_list -%}
+    {%- capture visible -%}{% render 'collection-is-visible', collection: coll %}{%- endcapture -%}
+    {%- if visible == 'true' -%}
+      {%- assign visible_count = visible_count | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- else -%}
+  {%- for coll in collections -%}
+    {%- capture visible -%}{% render 'collection-is-visible', collection: coll %}{%- endcapture -%}
+    {%- if visible == 'true' -%}
+      {%- assign visible_count = visible_count | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- if visible_count > 0 -%}
 <section class="section section--collections" data-section-id="{{ section.id }}">
   <div class="container">
     <div class="block-header block-header--center">
@@ -6,31 +28,14 @@
     </div>
 
     <div class="collections-grid">
+      {%- assign shown_count = 0 -%}
       {%- if section.settings.collection_list != blank -%}
-        {%- for coll in section.settings.collection_list limit: section.settings.collections_to_show -%}
-          <a href="{{ coll.url }}" class="collection-card">
-            <div class="collection-card__overlay"></div>
-            <h3 class="collection-card__title font-display">{{ coll.title }}</h3>
-            {%- if coll.featured_image -%}
-              {{
-                coll.featured_image
-                | image_url: width: 600
-                | image_tag: class: 'collection-card__image', loading: 'lazy', alt: coll.title
-              }}
-            {%- elsif coll.products.first.featured_media -%}
-              {{
-                coll.products.first.featured_media
-                | image_url: width: 600
-                | image_tag: class: 'collection-card__image', loading: 'lazy', alt: coll.title
-              }}
-            {%- else -%}
-              {{ 'collection-1' | placeholder_svg_tag: 'collection-card__placeholder' }}
-            {%- endif -%}
-          </a>
-        {%- endfor -%}
-      {%- else -%}
-        {%- for coll in collections limit: section.settings.collections_to_show -%}
-          {%- unless coll.handle == 'frontpage' -%}
+        {%- for coll in section.settings.collection_list -%}
+          {%- if shown_count >= collections_to_show -%}
+            {%- break -%}
+          {%- endif -%}
+          {%- capture visible -%}{% render 'collection-is-visible', collection: coll %}{%- endcapture -%}
+          {%- if visible == 'true' -%}
             <a href="{{ coll.url }}" class="collection-card">
               <div class="collection-card__overlay"></div>
               <h3 class="collection-card__title font-display">{{ coll.title }}</h3>
@@ -46,16 +51,43 @@
                   | image_url: width: 600
                   | image_tag: class: 'collection-card__image', loading: 'lazy', alt: coll.title
                 }}
-              {%- else -%}
-                {{ 'collection-1' | placeholder_svg_tag: 'collection-card__placeholder' }}
               {%- endif -%}
             </a>
-          {%- endunless -%}
+            {%- assign shown_count = shown_count | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for coll in collections -%}
+          {%- if shown_count >= collections_to_show -%}
+            {%- break -%}
+          {%- endif -%}
+          {%- capture visible -%}{% render 'collection-is-visible', collection: coll %}{%- endcapture -%}
+          {%- if visible == 'true' -%}
+            <a href="{{ coll.url }}" class="collection-card">
+              <div class="collection-card__overlay"></div>
+              <h3 class="collection-card__title font-display">{{ coll.title }}</h3>
+              {%- if coll.featured_image -%}
+                {{
+                  coll.featured_image
+                  | image_url: width: 600
+                  | image_tag: class: 'collection-card__image', loading: 'lazy', alt: coll.title
+                }}
+              {%- elsif coll.products.first.featured_media -%}
+                {{
+                  coll.products.first.featured_media
+                  | image_url: width: 600
+                  | image_tag: class: 'collection-card__image', loading: 'lazy', alt: coll.title
+                }}
+              {%- endif -%}
+            </a>
+            {%- assign shown_count = shown_count | plus: 1 -%}
+          {%- endif -%}
         {%- endfor -%}
       {%- endif -%}
     </div>
   </div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {

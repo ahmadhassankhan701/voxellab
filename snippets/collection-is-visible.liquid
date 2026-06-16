@@ -1,0 +1,8 @@
+{%- liquid
+  assign visible = true
+
+  if collection.handle == 'frontpage' or collection.all_products_count == 0
+    assign visible = false
+  endif
+-%}
+{{- visible -}}

@@ -41,7 +41,10 @@
           <div class="products-grid products-grid--3">
             {%- for item in search.results -%}
               {%- if item.object_type == 'product' -%}
-                {% render 'product-card', product_ref: item %}
+                {%- capture listable -%}{% render 'product-is-listable', product: item %}{%- endcapture -%}
+                {%- if listable == 'true' -%}
+                  {% render 'product-card', product_ref: item %}
+                {%- endif -%}
               {%- endif -%}
             {%- endfor -%}
           </div>

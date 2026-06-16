@@ -39,13 +39,14 @@
               </a>
             </li>
             {%- for coll in collections -%}
-              {%- unless coll.handle == 'frontpage' -%}
+              {%- capture visible -%}{% render 'collection-is-visible', collection: coll %}{%- endcapture -%}
+              {%- if visible == 'true' -%}
                 <li>
                   <a href="{{ coll.url }}" class="sidebar-link{% if coll.handle == collection.handle %} sidebar-link--active{% endif %}">
                     {{ coll.title }} <span class="sidebar-link__count">({{ coll.all_products_count }})</span>
                   </a>
                 </li>
-              {%- endunless -%}
+              {%- endif -%}
             {%- endfor -%}
           </ul>
         </div>
@@ -80,7 +81,10 @@
           {%- else -%}
             <div class="products-grid products-grid--3">
               {%- for product in collection.products -%}
-                {% render 'product-card', product_ref: product %}
+                {%- capture listable -%}{% render 'product-is-listable', product: product %}{%- endcapture -%}
+                {%- if listable == 'true' -%}
+                  {% render 'product-card', product_ref: product %}
+                {%- endif -%}
               {%- endfor -%}
             </div>
 

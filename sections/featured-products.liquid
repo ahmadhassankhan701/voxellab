@@ -4,8 +4,17 @@
     assign collection = collections.all
   endif
   assign products_to_show = section.settings.products_to_show | default: 4
+  assign shown_count = 0
 -%}
 
+{%- for product in collection.products -%}
+  {%- capture listable -%}{% render 'product-is-listable', product: product %}{%- endcapture -%}
+  {%- if listable == 'true' -%}
+    {%- assign shown_count = shown_count | plus: 1 -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if shown_count > 0 -%}
 <section class="section section--products" data-section-id="{{ section.id }}">
   <div class="container">
     <div class="block-header{% if section.settings.heading_style == 'curated' %} block-header--center{% else %} block-header--split{% endif %}">
@@ -27,17 +36,16 @@
     </div>
 
     <div class="products-grid products-grid--4">
-      {%- for product in collection.products limit: products_to_show -%}
-        {% render 'product-card', product_ref: product %}
-      {%- else -%}
-        {%- for i in (1..products_to_show) -%}
-          <div class="product-card product-card--placeholder">
-            <div class="product-card__media">{{ 'product-' | append: i | placeholder_svg_tag }}</div>
-            <div class="product-card__info">
-              <h3 class="product-card__title">{{ 'onboarding.product_title' | t }}</h3>
-            </div>
-          </div>
-        {%- endfor -%}
+      {%- assign shown_count = 0 -%}
+      {%- for product in collection.products -%}
+        {%- if shown_count >= products_to_show -%}
+          {%- break -%}
+        {%- endif -%}
+        {%- capture listable -%}{% render 'product-is-listable', product: product %}{%- endcapture -%}
+        {%- if listable == 'true' -%}
+          {% render 'product-card', product_ref: product %}
+          {%- assign shown_count = shown_count | plus: 1 -%}
+        {%- endif -%}
       {%- endfor -%}
     </div>
 
@@ -48,6 +56,7 @@
     </div>
   </div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {

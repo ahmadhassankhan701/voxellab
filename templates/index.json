@@ -22,12 +22,7 @@
     "featured_collections": {
       "type": "featured-collections",
       "settings": {
-        "collection_list": [
-          "desk-stationary",
-          "lighting",
-          "planters",
-          "vases"
-        ],
+        "collection_list": [],
         "collections_to_show": 4
       }
     },
@@ -46,7 +41,6 @@
         "title_line1": "",
         "title_line2": "",
         "body": "",
-        "image": "shopify://shop_images/story.png",
         "button_link": "shopify://pages/about"
       }
     },
