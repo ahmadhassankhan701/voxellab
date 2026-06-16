@@ -22,7 +22,13 @@
     "featured_collections": {
       "type": "featured-collections",
       "settings": {
-        "collection_list": [],
+        "collection_list": [
+          "bath",
+          "desk-stationary",
+          "lighting",
+          "planters",
+          "vases"
+        ],
         "collections_to_show": 4
       }
     },
@@ -38,8 +44,6 @@
     "brand_story": {
       "type": "brand-story",
       "settings": {
-        "title_line1": "",
-        "title_line2": "",
         "body": "",
         "button_link": "shopify://pages/about"
       }
