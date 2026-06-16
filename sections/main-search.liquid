@@ -42,7 +42,8 @@
             {%- for item in search.results -%}
               {%- if item.object_type == 'product' -%}
                 {%- capture listable -%}{% render 'product-is-listable', product: item %}{%- endcapture -%}
-                {%- if listable == 'true' -%}
+                {%- assign listable = listable | strip -%}
+                {%- if listable == 'yes' -%}
                   {% render 'product-card', product_ref: item %}
                 {%- endif -%}
               {%- endif -%}
