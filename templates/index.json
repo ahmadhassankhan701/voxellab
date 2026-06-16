@@ -36,7 +36,7 @@
       "settings": {
         "heading_style": "new_arrivals",
         "heading": "",
-        "collection": "bath",
+        "collection": "planters",
         "products_to_show": 4
       }
     },
@@ -52,7 +52,7 @@
       "settings": {
         "heading_style": "curated",
         "heading": "",
-        "collection": "",
+        "collection": "bath",
         "products_to_show": 8
       }
     }
