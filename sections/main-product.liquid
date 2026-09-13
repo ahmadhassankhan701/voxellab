@@ -72,13 +72,13 @@
 
         <script type="application/json" data-product-variants>{{ product.variants | json }}</script>
 
-        <div class="product-description rte">
+        {% comment %} <div class="product-description rte">
           {%- if product.description != blank -%}
             {{ product.description }}
           {%- else -%}
             <p>{{ 'product.no_description' | t }}</p>
           {%- endif -%}
-        </div>
+        </div> {% endcomment %}
 
         {% form 'product', product, class: 'product-form' %}
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
